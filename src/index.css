@@ -1,0 +1,60 @@
+﻿@import "tailwindcss";
+
+@theme {
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --color-background: hsl(230 35% 97%);
+  --color-foreground: hsl(234 52% 11%);
+  --color-card: hsl(0 0% 100%);
+  --color-card-foreground: hsl(234 52% 11%);
+  --color-primary: hsl(221 100% 58%);
+  --color-primary-foreground: hsl(0 0% 100%);
+  --color-secondary: hsl(230 35% 94%);
+  --color-secondary-foreground: hsl(234 40% 24%);
+  --color-muted: hsl(230 30% 95%);
+  --color-muted-foreground: hsl(230 12% 46%);
+  --color-accent: hsl(221 100% 96%);
+  --color-accent-foreground: hsl(221 70% 35%);
+  --color-border: hsl(230 22% 88%);
+
+  --color-brand-navy: #0d1029;
+  --color-brand-blue: #2f6bff;
+  --color-brand-sky: hsl(221 100% 96%);
+  --color-brand-soft: hsl(230 35% 97%);
+
+  /* Surface scale */
+  --color-surface-0:   #ffffff;
+  --color-surface-50:  #f8fafc;
+  --color-surface-100: #f1f5f9;
+  --color-surface-200: #e2e8f0;
+  --color-surface-800: #1e293b;
+  --color-surface-900: #0f172a;
+  --color-surface-950: #020617;
+
+  --radius: 0.625rem;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: #ffffff;
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* Reusable card elevation */
+.ui-card-elevated {
+  box-shadow: 0 1px 2px rgb(13 16 41 / 4%), 0 8px 24px rgb(47 107 255 / 8%);
+}
+
+.ui-card-elevated:hover {
+  box-shadow: 0 2px 4px rgb(13 16 41 / 6%), 0 12px 28px rgb(47 107 255 / 12%);
+}
