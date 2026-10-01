@@ -1,178 +1,232 @@
 ﻿/**
  * SECTION: Features Benefits by Module
  * ASSIGNED DEVELOPER: PERSON 3
- * OWNERSHIP SCOPE:
- * - Domain modules showcase (HRMS, CRM, Finance, Procurement, Warehouse)
- * - Module navigation state (active module selector / tab switching)
- * - Feature number, category, title, description, operational role
- * - Key domain capabilities checklist
- * - Visual module mockup preview / image placeholder
+ *
+ * Matches the Features Benefits by Module reference design.
  *
  * RULES:
  * - Modify ONLY this file or companion files inside your personal scope.
  * - Do NOT modify App.tsx or files assigned to other developers.
  */
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Users,
-  Briefcase,
-  DollarSign,
+  Wallet,
+  Banknote,
   ShoppingCart,
-  Boxes,
-  CheckCircle2,
-  ArrowRight,
-} from 'lucide-react';
-import { featureModules } from '../../data/landingData';
-import type { FeatureModule } from '../../types/landing.types';
+  Settings2,
+  ChevronLeft,
+  ChevronRight,
+  Check,
+} from "lucide-react";
 
-export const FeaturesByModule: React.FC = () => {
-  const [activeModuleId, setActiveModuleId] = useState<string>(
-    featureModules[0].id,
-  );
+import hrWorkforceImage from "../../assets/hr-workforce.png";
+import financeImage from "../../assets/finance-accounting.png";
+import payrollImage from "../../assets/payroll.png";
+import procurementImage from "../../assets/procurement.png";
+import operationsImage from "../../assets/operations.png";
 
-  const activeModule: FeatureModule =
-    featureModules.find((m) => m.id === activeModuleId) || featureModules[0];
+type Module = {
+  number: string;
+  category: string;
+  title: string;
+  tagline: string;
+  features: string[];
+  image?: string;
+  icon: React.ReactNode;
+};
 
-  const getModuleIcon = (iconName: string) => {
-    switch (iconName) {
-      case 'Users':
-        return <Users className="w-5 h-5 text-indigo-600" />;
-      case 'Briefcase':
-        return <Briefcase className="w-5 h-5 text-emerald-600" />;
-      case 'DollarSign':
-        return <DollarSign className="w-5 h-5 text-purple-600" />;
-      case 'ShoppingCart':
-        return <ShoppingCart className="w-5 h-5 text-sky-600" />;
-      case 'Boxes':
-      default:
-        return <Boxes className="w-5 h-5 text-amber-600" />;
-    }
+const modules: Module[] = [
+  {
+    number: "01",
+    category: "HR & Workforce",
+    title: "HR & Workforce",
+    tagline: "One Platform for Every HR Workflow",
+    icon: <Users className="h-4 w-4" />,
+    image: hrWorkforceImage,
+    features: [
+      "Employee Self Service Portal",
+      "Recruitment & ATS",
+      "Performance Management",
+      "Learning & Development",
+      "Leave & Attendance Management",
+      "Org Chart & Succession Planning",
+    ],
+  },
+  {
+    number: "02",
+    category: "Finance & Accounting",
+    title: "Finance & Accounting",
+    tagline: "Close Faster. Report Smarter.",
+    icon: <Wallet className="h-4 w-4" />,
+    image: financeImage,
+    features: [
+      "General Ledger & Sub Ledgers",
+      "AP / AR Automation",
+      "Multi Currency & Multi Entity",
+      "Budget Planning & Forecasting",
+      "Financial Consolidation",
+      "Regulatory Reporting",
+    ],
+  },
+  {
+    number: "03",
+    category: "Payroll",
+    title: "Payroll",
+    tagline: "Error-Free Payroll, Every Cycle",
+    icon: <Banknote className="h-4 w-4" />,
+    image: payrollImage,
+    features: [
+      "Multi State & Multi Country Payroll",
+      "Statutory Compliance Automation",
+      "Payslip & Form 16 Generation",
+      "Bank Integration & Direct Deposit",
+      "Arrear & Incentive Processing",
+      "Full & Final Settlement",
+    ],
+  },
+  {
+    number: "04",
+    category: "Procurement",
+    title: "Procurement",
+    tagline: "Source Smarter. Spend Leaner.",
+    icon: <ShoppingCart className="h-4 w-4" />,
+    image: procurementImage,
+    features: [
+      "Vendor Onboarding & Evaluation",
+      "Purchase Requisition & PO",
+      "Contract Management",
+      "Three Way Matching",
+      "Spend Analytics Dashboard",
+      "Vendor Payment Portal",
+    ],
+  },
+  {
+    number: "05",
+    category: "Operations",
+    title: "Operations",
+    tagline: "Streamline Every Operational Process",
+    icon: <Settings2 className="h-4 w-4" />,
+    image: operationsImage,
+    features: [
+      "Asset & Inventory Management",
+      "Facilities & Maintenance",
+      "Project & Task Management",
+      "Workflow Automation Builder",
+      "Field Operations Tracking",
+      "Helpdesk & Ticketing",
+    ],
+  },
+];
+
+const FeaturesByModule: React.FC = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const activeModule = modules[activeIndex];
+
+  const goPrevious = () => {
+    setActiveIndex((current) =>
+      current === 0 ? modules.length - 1 : current - 1,
+    );
+  };
+
+  const goNext = () => {
+    setActiveIndex((current) =>
+      current === modules.length - 1 ? 0 : current + 1,
+    );
   };
 
   return (
-    <section id="domains" className="py-24 px-6 bg-slate-50/70 border-y border-slate-200/80">
-      <div className="max-w-6xl mx-auto space-y-16">
-        {/* Section Header */}
-        <div className="text-center space-y-3">
-          <span className="text-xs font-mono uppercase font-bold tracking-wider text-indigo-600 bg-indigo-50 border border-indigo-100 px-3 py-1 rounded-full">
-            Autonomous Business Domains
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
-            Comprehensive Enterprise Modules
+    <section
+      id="domains"
+      className="relative overflow-hidden bg-[#13183A] px-6 py-7 sm:px-8 sm:py-8 lg:px-10 lg:py-8"
+    >
+      <div className="mx-auto max-w-[900px]">
+        <div className="mb-5 text-center">
+          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-[32px]">
+            Features Benefits by Module
           </h2>
-          <p className="text-base text-slate-600 max-w-2xl mx-auto">
-            Each business module is an autonomous domain designed for specialized workflows, running on a unified, partition-isolated core.
+          <p className="mt-2 text-[14px] font-bold leading-relaxed text-slate-300">
+            A unified platform designed to bring people, processes, data, and
+            business functions together.
           </p>
         </div>
-
-        {/* Module Navigation Tabs (Data-Driven Navigation State) */}
-        <div className="flex flex-wrap items-center justify-center gap-2 p-1.5 rounded-2xl bg-white border border-slate-200/80 shadow-2xs max-w-3xl mx-auto">
-          {featureModules.map((mod) => (
-            <button
-              key={mod.id}
-              onClick={() => setActiveModuleId(mod.id)}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold transition-all ${
-                activeModuleId === mod.id
-                  ? 'bg-indigo-600 text-white shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
-              }`}
-            >
-              <span>{mod.featureNumber}</span>
-              <span>{mod.title}</span>
-            </button>
-          ))}
-        </div>
-
-        {/* Active Module Detailed Showcase Card */}
-        <div className="rounded-3xl border border-slate-200 bg-white p-8 sm:p-12 shadow-xs grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          {/* Left Column: Details & Capabilities */}
-          <div className="lg:col-span-7 space-y-6">
-            <div className="space-y-2">
+        <div className="relative overflow-hidden rounded-[9px] border border-[#30385F] bg-[#202750]">
+          <div className="grid min-h-[265px] grid-cols-1 md:grid-cols-[1.08fr_0.92fr]">
+            <div className="flex flex-col px-6 py-6 sm:px-7 sm:py-7">
               <div className="flex items-center gap-3">
-                <span className="text-xs font-mono font-bold text-indigo-600 uppercase tracking-wider">
-                  Module {activeModule.featureNumber} • {activeModule.category}
-                </span>
-                <span className="text-[11px] px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 font-semibold">
-                  Role: {activeModule.operationalRole}
+                <span className="font-mono text-[44px] font-light leading-none tracking-tight text-white">
+                  {activeModule.number}
                 </span>
               </div>
-              <h3 className="text-3xl font-black text-slate-900 tracking-tight">
-                {activeModule.title}
-              </h3>
-              <p className="text-xs font-semibold text-slate-500 font-mono">
+              <div className="mt-4">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-[#3975FF] bg-[#1D2851] px-3 py-1.5 text-[11px] font-semibold text-white">
+                  {activeModule.icon}
+                  {activeModule.category}
+                </span>
+              </div>
+              <h3 className="mt-3 max-w-[390px] text-[24px] font-bold leading-[1.2] tracking-tight text-white">
                 {activeModule.tagline}
-              </p>
-            </div>
-
-            <p className="text-sm text-slate-600 leading-relaxed">
-              {activeModule.description}
-            </p>
-
-            {/* Key Capabilities Checklist */}
-            <div className="space-y-2.5 pt-2 border-t border-slate-100">
-              <div className="text-xs font-bold text-slate-900 uppercase tracking-wide">
-                Key Domain Capabilities:
-              </div>
-              <div className="space-y-2">
-                {activeModule.keyCapabilities.map((cap, i) => (
-                  <div key={i} className="flex items-start gap-2.5 text-xs text-slate-700">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                    <span>{cap}</span>
+              </h3>
+              <div className="mt-3 grid max-w-[390px] grid-cols-2 gap-x-5 gap-y-2">
+                {activeModule.features.map((feature) => (
+                  <div key={feature} className="flex items-start gap-1.5">
+                    <span className="mt-[2px] flex h-3 w-3 shrink-0 items-center justify-center rounded-full bg-[#263B79]">
+                      <Check className="h-2 w-2 text-[#4F83FF]" />
+                    </span>
+                    <span className="text-[11px] font-medium leading-[1.4] text-[#E2E7F5]">
+                      {feature}
+                    </span>
                   </div>
                 ))}
               </div>
             </div>
-
-            {/* Link to module console */}
-            <div className="pt-4">
-              <a
-                href="#login"
-                className="inline-flex items-center gap-2 text-xs font-bold text-indigo-600 hover:text-indigo-800 transition-colors"
-              >
-                Access {activeModule.title} Workspace <ArrowRight className="w-3.5 h-3.5" />
-              </a>
+            <div className="flex items-center justify-center px-6 py-5 sm:px-7">
+              {activeModule.image ? (
+                <img
+                  src={activeModule.image}
+                  alt={`${activeModule.title} module`}
+                  className="h-[210px] w-full max-w-[293px] rounded-[8px] border border-[#2771FF] object-cover"
+                />
+              ) : (
+                <div className="flex h-[210px] w-full max-w-[293px] items-center justify-center rounded-[8px] border border-[#2771FF] bg-[#172044]">
+                  <div className="text-center">
+                    <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-[#222E5C] text-[#6C96FF]">
+                      {activeModule.icon}
+                    </div>
+                    <p className="text-xs font-semibold text-white">
+                      {activeModule.title}
+                    </p>
+                    <p className="mt-1 text-[9px] text-slate-400">
+                      Module Preview
+                    </p>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
-
-          {/* Right Column: Module UI Preview / Visual Mockup */}
-          <div className="lg:col-span-5">
-            <div className="rounded-2xl border border-slate-200/90 bg-gradient-to-br from-slate-50 to-indigo-50/40 p-6 flex flex-col justify-between min-h-[300px] shadow-2xs">
-              <div className="flex items-center justify-between pb-4 border-b border-slate-200/60">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-rose-400" />
-                  <div className="w-3 h-3 rounded-full bg-amber-400" />
-                  <div className="w-3 h-3 rounded-full bg-emerald-400" />
-                </div>
-                <div className="text-[10px] font-mono text-slate-400">
-                  {activeModule.id}-console.onecloud
-                </div>
-              </div>
-
-              {/* Mockup Body Content */}
-              <div className="py-8 text-center space-y-3">
-                <div className="w-14 h-14 rounded-2xl bg-white shadow-xs border border-slate-200 flex items-center justify-center mx-auto">
-                  {getModuleIcon(activeModule.iconName)}
-                </div>
-                <div className="font-extrabold text-sm text-slate-900">
-                  {activeModule.title} Console
-                </div>
-                <div className="text-xs text-slate-500 max-w-xs mx-auto">
-                  Interactive operational interface configured for the {activeModule.operationalRole}.
-                </div>
-              </div>
-
-              {/* Status footer inside mockup */}
-              <div className="pt-3 border-t border-slate-200/60 flex items-center justify-between text-[11px] font-mono text-slate-500">
-                <span>Domain Status</span>
-                <span className="text-emerald-600 font-bold">● Active & Connected</span>
-              </div>
-            </div>
-          </div>
+        </div>
+        <div className="mt-4 flex items-center justify-center gap-5">
+          <button
+            type="button"
+            onClick={goPrevious}
+            aria-label="Previous module"
+            className="text-white transition-opacity hover:opacity-60"
+          >
+            <ChevronLeft className="h-4 w-4 stroke-[1.5]" />
+          </button>
+          <button
+            type="button"
+            onClick={goNext}
+            aria-label="Next module"
+            className="text-white transition-opacity hover:opacity-60"
+          >
+            <ChevronRight className="h-4 w-4 stroke-[1.5]" />
+          </button>
         </div>
       </div>
     </section>
   );
 };
-
 export default FeaturesByModule;
