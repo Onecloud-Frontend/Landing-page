@@ -1,6 +1,7 @@
-﻿import type {
+import type {
   NavItem,
   HeroContent,
+  HeroFloatingBadge,
   ValuePillar,
   RolePreview,
   FeatureModule,
@@ -516,3 +517,12 @@ export const footerData = {
     },
   ] as FooterLinkSection[],
 };
+
+export const heroFloatingBadges: HeroFloatingBadge[] = [
+  { id: 'badge-workflow', iconName: 'Workflow', label: 'Workflow', position: 'top-6 left-0' },
+  { id: 'badge-hrms', iconName: 'Users', label: 'HRMS', position: 'top-28 right-0' },
+  { id: 'badge-ai', iconName: 'Bot', label: 'AI', position: 'top-44 left-6' },
+  { id: 'badge-crm', iconName: 'Shield', label: 'CRM', position: 'top-52 right-10' },
+  { id: 'badge-finance', iconName: 'BarChart3', label: 'Finance', position: 'bottom-12 left-10' },
+  { id: 'badge-erp', iconName: 'Boxes', label: 'ERP', position: 'bottom-16 right-4' },
+];

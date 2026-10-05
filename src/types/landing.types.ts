@@ -112,3 +112,10 @@ export interface FooterLinkSection {
     isExternal?: boolean;
   }[];
 }
+export interface HeroFloatingBadge {
+  id: string;
+  iconName: string;
+  label: string;
+  /** Tailwind position classes for this badge's placement within the hero. */
+  position: string;
+}
