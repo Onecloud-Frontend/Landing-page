@@ -1,7 +1,6 @@
 import type {
   NavItem,
   HeroContent,
-  HeroFloatingBadge,
   ValuePillar,
   RolePreview,
   FeatureModule,
@@ -10,12 +9,8 @@ import type {
   FAQItem,
   CTAContent,
   FooterLinkSection,
+  HeroFloatingBadge,
 } from '../types/landing.types';
-
-/**
- * One Enterprise Cloud - Master Landing Page Data Store
- * SOURCED FROM APPROVED VISUAL REFERENCE
- */
 
 export const navItems: NavItem[] = [
   { label: 'Platform', href: '#platform' },
@@ -28,8 +23,8 @@ export const navItems: NavItem[] = [
 
 export const heroData: HeroContent = {
   eyebrow: 'ONE ENTERPRISE CLOUD PLATFORM',
-  title: 'One Platform. Every Enterprise Function.',
-  highlightedTitle: 'Connected.',
+  title: 'One Platform. Every',
+  highlightedTitle: 'Business Function.',
   description:
     "Bring your organization's people, processes, operations, and business domains together in one unified, secure, enterprise workspace.",
   primaryCta: {
@@ -46,6 +41,15 @@ export const heroData: HeroContent = {
     'Role-Based Operational Experience',
   ],
 };
+
+export const heroFloatingBadges: HeroFloatingBadge[] = [
+  { id: 'badge-workflow', iconName: 'Workflow', label: 'Workflow', xPercent: 13, yPercent: 24, variant: 'filled' },
+  { id: 'badge-hrms', iconName: 'Users', label: 'HRMS', xPercent: 87, yPercent: 24, variant: 'filled' },
+  { id: 'badge-ai', iconName: 'Bot', label: 'AI', xPercent: 12, yPercent: 42, variant: 'filled' },
+  { id: 'badge-crm', iconName: 'Shield', label: 'CRM', xPercent: 88, yPercent: 42, variant: 'filled' },
+  { id: 'badge-finance', iconName: 'BarChart3', label: 'Finance', xPercent: 13, yPercent: 65, variant: 'filled' },
+  { id: 'badge-erp', iconName: 'Boxes', label: 'ERP', xPercent: 85, yPercent: 65, variant: 'filled' },
+];
 
 export const valuePillars: ValuePillar[] = [
   {
@@ -418,7 +422,7 @@ export const clientTestimonials: ClientTestimonial[] = [
     avatar: '/assets/testimonials/avatar-2.jpg',
     rating: 5,
     testimonial:
-      'The multi-tenant architecture with strict organization boundaries allowed us to onboard four subsidiaries in under three weeks while maintaining strict compliance isolation.',
+      'The multi-tenant architecture with strict organization boundaries allowed us to onboard four subsidiaries in under three weeks while maintaining strictcompliance isolation.',
     highlightMetric: '3-Week Multi-Tenant Rollout',
   },
   {
@@ -439,7 +443,7 @@ export const faqItems: FAQItem[] = [
     id: 'faq-1',
     question: 'How does One Enterprise Cloud handle multi-tenant data isolation?',
     answer:
-      'Each provisioned organization operates within a cryptographically isolated tenant partition. Data layers, session tokens, audit logs, and configuration flags are partition-aware, preventing cross-organization data leakage while running on high-efficiency shared infrastructure.',
+      'Each provisioned organization operates within a cryptographically isolated tenant partition. Data layers, session tokens, audit logs, and configurationflags are partition-aware, preventing cross-organization data leakage while running on high-efficiency shared infrastructure.',
     category: 'Security & Multi-Tenancy',
   },
   {
@@ -518,11 +522,10 @@ export const footerData = {
   ] as FooterLinkSection[],
 };
 
-export const heroFloatingBadges: HeroFloatingBadge[] = [
-  { id: 'badge-workflow', iconName: 'Workflow', label: 'Workflow', position: 'top-6 left-0' },
-  { id: 'badge-hrms', iconName: 'Users', label: 'HRMS', position: 'top-28 right-0' },
-  { id: 'badge-ai', iconName: 'Bot', label: 'AI', position: 'top-44 left-6' },
-  { id: 'badge-crm', iconName: 'Shield', label: 'CRM', position: 'top-52 right-10' },
-  { id: 'badge-finance', iconName: 'BarChart3', label: 'Finance', position: 'bottom-12 left-10' },
-  { id: 'badge-erp', iconName: 'Boxes', label: 'ERP', position: 'bottom-16 right-4' },
-];
+
+
+
+
+
+
+
