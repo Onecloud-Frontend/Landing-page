@@ -154,7 +154,7 @@ const FeaturesByModule: React.FC = () => {
             onClick={goPrevious}
             disabled={isChanging}
             aria-label="Previous module"
-            className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-xl text-white transition-all duration-200 ease-in-out hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
+            className="flex h-11 w-11 items-center justify-center rounded-xl text-white transition-all duration-200 ease-in-out hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
           >
             <ChevronLeft className="h-5 w-5 stroke-[1.5]" aria-hidden="true" />
           </button>
@@ -163,7 +163,7 @@ const FeaturesByModule: React.FC = () => {
             onClick={goNext}
             disabled={isChanging}
             aria-label="Next module"
-            className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-xl text-white transition-all duration-200 ease-in-out hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
+            className="flex h-11 w-11 items-center justify-center rounded-xl text-white transition-all duration-200 ease-in-out hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
           >
             <ChevronRight className="h-5 w-5 stroke-[1.5]" aria-hidden="true" />
           </button>
