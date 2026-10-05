@@ -52,11 +52,11 @@ const FAQ: React.FC = () => {
       <div className="relative mx-auto max-w-[1180px]">
         {/* Header */}
         <div className="mb-14 text-center">
-          <h2 className="text-[30px] font-bold tracking-[-0.8px] text-white sm:text-[38px]">
+          <h2 className="text-[30px] font-Onest tracking-[-0.8px] text-white sm:text-[38px]">
             Frequently Asked Questions
           </h2>
 
-          <p className="mt-3 text-[11px] font-normal text-[#8e9bd0] sm:text-[12px]">
+          <p className="mt-3 text-[11px] font-Onest text-[#8e9bd0] sm:text-[12px]">
             Clear answers about building a more connected enterprise.
           </p>
         </div>
@@ -65,7 +65,7 @@ const FAQ: React.FC = () => {
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[360px_1fr] lg:gap-12">
           {/* Left side */}
           <div className="flex flex-col">
-            <h3 className="text-[39px] font-light leading-[0.98] tracking-[-1.8px] text-white sm:text-[46px]">
+            <h3 className="text-[39px] font-Onest leading-[0.98] tracking-[-1.8px] text-white sm:text-[46px]">
               Question &amp;
               <br />
               Answer&apos;s
@@ -85,7 +85,7 @@ const FAQ: React.FC = () => {
                 </div>
 
                 <div>
-                  <h4 className="text-[15px] font-semibold text-white">
+                  <h4 className="text-[15px] font-Onest text-white">
                     Thomas alva
                   </h4>
 
@@ -97,7 +97,7 @@ const FAQ: React.FC = () => {
 
               {/* Rating */}
               <div className="mt-5 flex items-center gap-1.5">
-                <span className="mr-1 text-[9px] font-semibold text-[#c0c8e4]">
+                <span className="mr-1 text-[9px] font-Onest text-[#c0c8e4]">
                   5.0
                 </span>
 
@@ -140,7 +140,7 @@ const FAQ: React.FC = () => {
                     aria-expanded={isOpen}
                     className="flex w-full items-center justify-between gap-5 px-5 py-[17px] text-left"
                   >
-                    <span className="text-[11px] font-semibold leading-5 text-[#dce2ff] sm:text-[12px]">
+                    <span className="text-[11px] font-Onest leading-5 text-[#dce2ff] sm:text-[12px]">
                       {item.question}
                     </span>
 
