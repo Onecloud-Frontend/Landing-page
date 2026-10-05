@@ -5,6 +5,7 @@ import {
   SlidersHorizontal,
   type LucideIcon,
 } from 'lucide-react';
+import { useEffect } from 'react';
 
 type WorkflowStep = {
   number: string;
@@ -50,10 +51,27 @@ const workflowSteps: WorkflowStep[] = [
 ];
 
 export const HowItWorks = () => {
+  useEffect(() => {
+    const existingFont = document.querySelector(
+      'link[data-onest-font="true"]',
+    );
+
+    if (!existingFont) {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href =
+        'https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap';
+      link.dataset.onestFont = 'true';
+
+      document.head.appendChild(link);
+    }
+  }, []);
+
   return (
     <section
       id="how-it-works"
       aria-labelledby="how-it-works-title"
+      style={{ fontFamily: "'Onest', sans-serif" }}
       className="relative isolate overflow-hidden bg-[#13183A] px-5 pb-[104px] pt-[72px] sm:px-8 sm:pb-[118px] sm:pt-20 lg:px-12 lg:pb-[105px] lg:pt-[73px]"
     >
       <div
