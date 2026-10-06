@@ -11,7 +11,7 @@ export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-[#171C42]/90 backdrop-blur-md border-b border-white/[0.06] transition-all">
+    <header className="relative z-50 w-full bg-[#12163A]/80 backdrop-blur-md border-b border-white/5 transition-all">
       <div className="w-full px-8 lg:px-14 h-20 flex items-center justify-between">
         {/* Prominent Stackly Brand Logo */}
         <a href="#" className="flex items-center shrink-0">
@@ -50,7 +50,7 @@ export const Navbar: React.FC = () => {
           </a>
           <a
             href="#get-started"
-            className="rounded-full bg-[#587BE8] px-6 py-2.5 text-[11px] font-semibold text-white shadow-[0_0_25px_rgba(88,123,232,0.85)] [text-shadow:0_0_12px_rgba(255,255,255,0.9)] hover:bg-[#6688F0] hover:shadow-[0_0_30px_rgba(102,136,240,1)] transition-all"
+            className="rounded-full bg-[#587BE8] px-6 py-2.5 text-[11px] font-semibold text-white shadow-[0_0_25px_rgba(88,123,232,0.85)] hover:bg-[#6688F0] hover:shadow-[0_0_30px_rgba(102,136,240,1)] transition-all"
           >
             Get Started
           </a>
@@ -68,7 +68,7 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-b border-slate-700 bg-[#171C42] px-6 py-5 space-y-4 shadow-lg">
+        <div className="lg:hidden border-b border-white/10 bg-[#12163A]/95 px-6 py-5 space-y-4 shadow-lg backdrop-blur-md">
           <nav className="flex flex-col gap-3 text-sm font-semibold text-white/85">
             {[
               { label: 'Why One Enterprise', href: '#enterprise' },
@@ -95,7 +95,7 @@ export const Navbar: React.FC = () => {
             </a>
             <a
               href="#get-started"
-              className="w-full text-center py-2.5 rounded-full bg-[#587BE8] text-white text-xs font-semibold shadow-[0_0_25px_rgba(88,123,232,0.85)] [text-shadow:0_0_12px_rgba(255,255,255,0.9)] hover:bg-[#6688F0]"
+              className="w-full text-center py-2.5 rounded-full bg-[#587BE8] text-white text-xs font-semibold shadow-[0_0_25px_rgba(88,123,232,0.85)] hover:bg-[#6688F0]"
             >
               Get Started
             </a>
@@ -107,3 +107,5 @@ export const Navbar: React.FC = () => {
 };
 
 export default Navbar;
+
+

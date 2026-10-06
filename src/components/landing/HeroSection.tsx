@@ -9,11 +9,11 @@ import erpIcon from '../../assets/icons/erp_icon.png';
 
 export const HeroSection: React.FC = () => {
   return (
-    <section className="relative min-h-[580px] sm:min-h-[640px] md:min-h-[680px] lg:min-h-[740px] xl:min-h-[780px] overflow-hidden bg-[#171C42] px-4 sm:px-6 pt-24 sm:pt-28 md:pt-36 lg:pt-40 xl:pt-44 pb-14 sm:pb-16 md:pb-20">
+    <section className="relative overflow-hidden bg-[#171C42] px-4 sm:px-6 pt-24 sm:pt-28 md:pt-32 lg:pt-36 pb-14 sm:pb-18 md:pb-20">
       
-      {/* Root Vertical Oval Glow: Originates right under the Navbar, covering the space above the pill */}
+      {/* Root Vertical Oval Ambient Glow */}
       <div 
-        className="absolute top-2 sm:top-4 lg:top-6 left-1/2 -translate-x-1/2 w-[460px] sm:w-[540px] lg:w-[620px] h-[580px] sm:h-[660px] lg:h-[720px] rounded-[50%/48%] bg-[radial-gradient(ellipse_at_top,_rgba(95,135,255,0.48)_0%,_rgba(65,98,225,0.28)_35%,_rgba(28,48,135,0.1)_60%,_transparent_75%)] blur-[55px] sm:blur-[65px] pointer-events-none z-10"
+        className="absolute top-0 sm:top-2 lg:top-4 left-1/2 -translate-x-1/2 w-[460px] sm:w-[540px] lg:w-[620px] h-[540px] sm:h-[600px] lg:h-[660px] rounded-[50%/60%] bg-[radial-gradient(ellipse_at_top,_rgba(95,135,255,0.48)_0%,_rgba(65,98,225,0.28)_36%,_rgba(28,48,135,0.1)_62%,_transparent_78%)] blur-[55px] sm:blur-[65px] pointer-events-none z-10"
         aria-hidden="true" 
       />
 
@@ -26,95 +26,131 @@ export const HeroSection: React.FC = () => {
       >
         <defs>
           <linearGradient id="connectionGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#4D6EC8" stopOpacity="0.2" />
+            <stop offset="0%" stopColor="#4D6EC8" stopOpacity="0.25" />
             <stop offset="50%" stopColor="#8EA9FF" stopOpacity="0.85" />
-            <stop offset="100%" stopColor="#4D6EC8" stopOpacity="0.2" />
+            <stop offset="100%" stopColor="#4D6EC8" stopOpacity="0.25" />
           </linearGradient>
 
-          <filter id="particleGlow">
-            <feGaussianBlur stdDeviation="2.5" result="blur" />
+          {/* Diffused outer glow filter for the particle halo */}
+          <filter id="ringHaloGlow" x="-60%" y="-60%" width="220%" height="220%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="3.2" result="blur" />
             <feMerge>
               <feMergeNode in="blur" />
               <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
+
+          {/* Exact circular glowing ring node matching the reference image */}
+          <g id="perfectGlowingRing">
+            <circle
+              cx="0"
+              cy="0"
+              r="6.5"
+              fill="none"
+              stroke="#507BEB"
+              strokeWidth="2.8"
+              strokeOpacity="0.75"
+              filter="url(#ringHaloGlow)"
+            />
+            <circle
+              cx="0"
+              cy="0"
+              r="4.8"
+              fill="#18244E"
+              fillOpacity="0.9"
+            />
+            <circle
+              cx="0"
+              cy="0"
+              r="4.8"
+              fill="none"
+              stroke="#9EC2FF"
+              strokeWidth="1.6"
+            />
+          </g>
         </defs>
 
-        {/* 6 Direct Connector Wires to Top-Middle of Each Card */}
+        {/* 6 Direct Connector Wires */}
         <g fill="none" stroke="url(#connectionGradient)" strokeWidth="1.3">
           {/* Left Cards */}
-          <path id="workflowPath" d="M 500 210 C 350 110, 220 120, 135 240" />
-          <path id="aiPath" d="M 500 210 C 340 210, 200 310, 120 440" />
-          <path id="financePath" d="M 500 210 C 340 350, 220 510, 135 670" />
+          <path id="workflowPath" d="M 500 211.5 C 400 70, 290 75, 210 145" />
+          <path id="aiPath"       d="M 500 211.5 C 370 162, 260 220, 190 320" />
+          <path id="financePath"  d="M 500 211.5 C 370 280, 270 415, 210 540" />
 
           {/* Right Cards */}
-          <path id="hrmsPath" d="M 500 210 C 650 110, 780 120, 865 240" />
-          <path id="crmPath" d="M 500 210 C 660 210, 800 310, 880 440" />
-          <path id="erpPath" d="M 500 210 C 660 350, 780 510, 865 670" />
+          <path id="hrmsPath"     d="M 500 211.5 C 600 70, 710 75, 790 145" />
+          <path id="crmPath"      d="M 500 211.5 C 630 162, 740 220, 810 320" />
+          <path id="erpPath"      d="M 500 211.5 C 630 280, 730 415, 790 540" />
         </g>
 
-        {/* Synchronised Light Pulses */}
-        <g fill="#A5BEFF" filter="url(#particleGlow)">
-          <circle r="3.5">
+        {/* Synchronised Hollow Glowing Rings Traveling along each wire */}
+        <g>
+          <g>
             <animateMotion dur="5s" begin="0s" repeatCount="indefinite">
               <mpath href="#workflowPath" />
             </animateMotion>
-          </circle>
-          <circle r="3.5">
+            <use href="#perfectGlowingRing" />
+          </g>
+          <g>
             <animateMotion dur="5s" begin="0s" repeatCount="indefinite">
               <mpath href="#aiPath" />
             </animateMotion>
-          </circle>
-          <circle r="3.5">
+            <use href="#perfectGlowingRing" />
+          </g>
+          <g>
             <animateMotion dur="5s" begin="0s" repeatCount="indefinite">
               <mpath href="#financePath" />
             </animateMotion>
-          </circle>
-          <circle r="3.5">
+            <use href="#perfectGlowingRing" />
+          </g>
+          <g>
             <animateMotion dur="5s" begin="0s" repeatCount="indefinite">
               <mpath href="#hrmsPath" />
             </animateMotion>
-          </circle>
-          <circle r="3.5">
+            <use href="#perfectGlowingRing" />
+          </g>
+          <g>
             <animateMotion dur="5s" begin="0s" repeatCount="indefinite">
               <mpath href="#crmPath" />
             </animateMotion>
-          </circle>
-          <circle r="3.5">
+            <use href="#perfectGlowingRing" />
+          </g>
+          <g>
             <animateMotion dur="5s" begin="0s" repeatCount="indefinite">
               <mpath href="#erpPath" />
             </animateMotion>
-          </circle>
+            <use href="#perfectGlowingRing" />
+          </g>
         </g>
       </svg>
 
-      {/* Floating Module Badges */}
+      {/* Floating Module Badges - Perfectly Centered Content */}
       <div className="absolute inset-0 pointer-events-none z-20 hidden lg:block">
         {[
-          { label: 'Workflow', icon: workflowIcon, side: 'left', top: '24%' },
-          { label: 'AI', icon: aiIcon, side: 'left', top: '44%' },
-          { label: 'Finance', icon: financeIcon, side: 'left', top: '67%' },
-          { label: 'HRMS', icon: hrmsIcon, side: 'right', top: '24%' },
-          { label: 'CRM', icon: crmIcon, side: 'right', top: '44%' },
-          { label: 'ERP', icon: erpIcon, side: 'right', top: '67%' },
+          { label: 'Workflow', icon: workflowIcon, side: 'left', top: '14.5%' },
+          { label: 'AI', icon: aiIcon, side: 'left', top: '32%' },
+          { label: 'Finance', icon: financeIcon, side: 'left', top: '54%' },
+          { label: 'HRMS', icon: hrmsIcon, side: 'right', top: '14.5%' },
+          { label: 'CRM', icon: crmIcon, side: 'right', top: '32%' },
+          { label: 'ERP', icon: erpIcon, side: 'right', top: '54%' },
         ].map((badge) => (
           <div
             key={badge.label}
-            className={`absolute -translate-x-1/2 flex items-center gap-2.5 rounded-xl border border-[#5675D8]/60 bg-[#2E3F80]/75 px-3.5 py-2 shadow-[0_0_18px_rgba(70,110,240,0.25)] backdrop-blur-md transition-all ${
+            className={`absolute -translate-x-1/2 flex h-[44px] xl:h-[46px] w-[116px] xl:w-[122px] items-center justify-center gap-2 rounded-2xl border border-[#4B6EC7]/60 bg-[#243572]/85 px-2.5 py-2 shadow-[0_0_20px_rgba(60,105,235,0.3)] backdrop-blur-md transition-all ${
               badge.side === 'left'
                 ? badge.label === 'AI'
-                  ? 'left-[7%] xl:left-[11%]'
-                  : 'left-[9%] xl:left-[13%]'
+                  ? 'left-[16%] xl:left-[19%]'
+                  : 'left-[18.5%] xl:left-[21%]'
                 : badge.label === 'CRM'
-                  ? 'left-[93%] xl:left-[89%]'
-                  : 'left-[91%] xl:left-[87%]'
+                  ? 'left-[84%] xl:left-[81%]'
+                  : 'left-[81.5%] xl:left-[79%]'
             }`}
             style={{ top: badge.top }}
           >
-            <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-white shadow-sm">
-              <img src={badge.icon} alt="" className="h-3.5 w-3.5 object-contain" />
+            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-xl bg-white shadow-sm">
+              <img src={badge.icon} alt="" className="h-4 w-4 object-contain" />
             </span>
-            <span className="text-[11px] font-medium tracking-wide text-white">
+            <span className="text-[11.5px] font-medium tracking-wide text-white">
               {badge.label}
             </span>
           </div>
@@ -131,7 +167,7 @@ export const HeroSection: React.FC = () => {
         </div>
 
         {/* Heading */}
-        <h1 className="mt-5 sm:mt-6 lg:mt-7 max-w-[640px] text-center text-[32px] sm:text-[40px] md:text-[46px] lg:text-[52px] xl:text-[56px] font-bold leading-[1.12] sm:leading-[1.08] tracking-[-0.02em] sm:tracking-[-0.022em]">
+        <h1 className="mt-5 sm:mt-6 lg:mt-7 max-w-[640px] text-center text-[32px] sm:text-[40px] md:text-[46px] lg:text-[52px] xl:text-[56px] font-bold leading-[1.12] sm:leading-[1.08] tracking-[-0.03em] sm:tracking-[-0.035em]">
           <span className="block text-white">One Platform.</span>
           <span className="block">
             <span className="text-white">Every </span>
@@ -151,7 +187,7 @@ export const HeroSection: React.FC = () => {
         </h1>
 
         {/* Subtitle Paragraph */}
-        <p className="mt-4 sm:mt-5 max-w-[580px] text-[12px] sm:text-[13px] md:text-[13.5px] font-normal tracking-wide leading-[1.7] sm:leading-[1.8] text-white/70 px-2 sm:px-0">
+        <p className="mt-4 sm:mt-5 max-w-[580px] text-[12px] sm:text-[13px] md:text-[13.5px] font-normal leading-[1.7] sm:leading-[1.8] text-white/70 px-2 sm:px-0">
           Bring your business operations together in one connected
           <br className="hidden sm:block" />
           {' '}cloud platform designed to simplify how teams, processes,
@@ -176,7 +212,7 @@ export const HeroSection: React.FC = () => {
         </div>
 
         {/* Trust Points */}
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-x-4 sm:gap-x-6 gap-y-2">
+        <div className="mt-7 sm:mt-8 flex flex-wrap items-center justify-center gap-x-4 sm:gap-x-6 gap-y-2">
           {[
             'Enterprise-ready',
             'Secure by design',
@@ -196,4 +232,3 @@ export const HeroSection: React.FC = () => {
 };
 
 export default HeroSection;
-
