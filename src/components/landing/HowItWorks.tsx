@@ -134,7 +134,8 @@ export const HowItWorks = () => {
 
               return (
                 <li key={step.number} className="relative z-10">
-                  <article className="relative flex min-h-[76px] items-center gap-3 rounded-[14px] border border-[#3e75ac] bg-[linear-gradient(105deg,rgba(20,48,109,0.98),rgba(14,35,84,0.98))] px-3 py-3 shadow-[0_10px_24px_rgba(3,12,48,0.42),inset_0_1px_0_rgba(151,208,255,0.2)] transition-transform duration-200 ease-in-out hover:-translate-y-0.5 hover:border-[#3b7dde] motion-reduce:transform-none sm:min-h-[78px] sm:gap-3.5 sm:px-4 lg:min-h-[70px] lg:gap-[15px] lg:rounded-[14px] lg:px-[15px] lg:py-3">
+                  <article className="group relative flex min-h-[76px] items-center gap-3 rounded-[14px] border border-[#3e75ac] bg-[linear-gradient(105deg,rgba(20,48,109,0.98),rgba(14,35,84,0.98))] px-3 py-3 shadow-[0_10px_24px_rgba(3,12,48,0.42),inset_0_1px_0_rgba(151,208,255,0.2)] transition-transform duration-200 ease-in-out hover:-translate-y-0.5 hover:border-[#3b7dde] hover:shadow-[0_0_12px_rgba(59,125,222,0.25)] motion-reduce:transform-none sm:min-h-[78px] sm:gap-3.5 sm:px-4 lg:min-h-[70px] lg:gap-[15px] lg:rounded-[14px] lg:px-[15px] lg:py-3">
+                    
                     <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] border border-[#16a7e9] bg-[radial-gradient(circle_at_42%_32%,#173c8d_0%,#0b2865_73%)] text-[#6edaff] shadow-[0_0_9px_rgba(8,164,243,0.17),inset_0_0_12px_rgba(20,90,194,0.38)] sm:h-[42px] sm:w-[42px] lg:h-[42px] lg:w-[42px] lg:rounded-[11px]">
                       <span className="absolute -left-1 -top-1 flex h-4 min-w-[22px] items-center justify-center rounded-[4px] border border-[#1597db] bg-[#0b326e] px-0.5 text-[7px] font-bold leading-none text-[#79dcff] shadow-[0_1px_4px_rgba(0,11,55,0.3)] lg:h-[15px] lg:min-w-[22px] lg:rounded-[4px] lg:text-[7px]">
                         {step.number}
