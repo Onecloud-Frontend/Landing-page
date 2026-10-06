@@ -1,11 +1,3 @@
-﻿/**
- * One Enterprise Cloud - Landing Page Type Definitions
- *
- * SHARED & PROTECTED CONTRACT:
- * All 6 developers must adhere to these unified type definitions.
- * Do not modify these shared types without team consensus.
- */
-
 export interface NavItem {
   label: string;
   href: string;
@@ -112,3 +104,14 @@ export interface FooterLinkSection {
     isExternal?: boolean;
   }[];
 }
+
+export interface HeroFloatingBadge {
+  id: string;
+  iconName: string;
+  label: string;
+  xPercent: number;
+  yPercent: number;
+  variant: 'filled' | 'light';
+}
+
+
