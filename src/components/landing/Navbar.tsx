@@ -26,7 +26,7 @@ export const Navbar: React.FC = () => {
   }, []);
 
   return (
-    <header className={`fixed inset-x-0 top-0 z-50 w-full transition-colors duration-300 ${scrolled || open ? 'bg-[#0F1330]/90 backdrop-blur-md' : 'bg-transparent'}`}>
+    <header className={`sticky top-0 z-50 w-full -mb-16 sm:-mb-20 transition-colors duration-300 ${scrolled || open ? 'bg-[#0F1330]/90 backdrop-blur-md' : 'bg-transparent'}`}>
       <div className="flex h-16 sm:h-20 items-center justify-between px-4 sm:px-8 lg:px-10 xl:px-14">
         <a href="#" className="shrink-0">
           <img src={stacklyLogo} alt="Stackly" className="h-7 sm:h-9 lg:h-10 w-auto" />
