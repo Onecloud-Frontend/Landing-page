@@ -1,252 +1,361 @@
-﻿/**
- * SECTION: Why One Enterprise Cloud
- * ASSIGNED DEVELOPER: PERSON 2
- * OWNERSHIP SCOPE:
- * - Architectural topology diagram ("The Connected Enterprise Nervous System")
- * - 4 Enterprise Governance Pillars (Connected, Organization-Aware, Role-Based, Integrated)
- * - 7 Role-based operational perspectives & telemetry previews
- * - Interactive role preview selector tabs & KPI metric cards
- *
- * RULES:
- * - Modify ONLY this file or companion files inside your personal scope.
- * - Do NOT modify App.tsx or files assigned to other developers.
- */
+﻿import type { CSSProperties } from "react";
+import { enterpriseBenefits } from "../../data/whyEnterpriseCloudData";
 
-import React, { useState } from 'react';
-import {
-  Globe,
-  Building2,
-  Users,
-  Layers,
-  Crown,
-  CheckCircle2,
-} from 'lucide-react';
-import { valuePillars, rolePreviews } from '../../data/landingData';
-import type { RolePreview } from '../../types/landing.types';
+/* =========================================================
+   DESKTOP CARD POSITIONS
 
-export const WhyEnterpriseCloud: React.FC = () => {
-  const [activeRole, setActiveRole] = useState<RolePreview['id']>('super-admin');
+   Card width = 380px
+   Position difference = 310px
+   Overlap = 380 - 310 = 70px
+   ========================================================= */
 
-  const activeRoleData =
-    rolePreviews.find((r) => r.id === activeRole) || rolePreviews[0];
+const cardPositions: CSSProperties[] = [
+  { left: 0, top: 0, zIndex: 6 },
+  { left: 310, top: 0, zIndex: 5 },
+  { left: 620, top: 0, zIndex: 4 },
 
-  const getPillarIcon = (name: string) => {
-    switch (name) {
-      case 'Globe':
-        return <Globe className="w-5 h-5 text-indigo-600" />;
-      case 'Building2':
-        return <Building2 className="w-5 h-5 text-slate-800" />;
-      case 'Users':
-        return <Users className="w-5 h-5 text-emerald-600" />;
-      case 'Layers':
-      default:
-        return <Layers className="w-5 h-5 text-sky-600" />;
-    }
-  };
+  { left: 0, top: 233, zIndex: 6 },
+  { left: 310, top: 233, zIndex: 5 },
+  { left: 620, top: 233, zIndex: 4 },
+];
+
+/* =========================================================
+   GLASS STYLE
+   ========================================================= */
+
+const glass =
+  "border border-white/[0.32] bg-white/[0.075] backdrop-blur-[22px] backdrop-saturate-[180%] backdrop-brightness-110 shadow-[inset_0_1px_0_rgba(255,255,255,0.40),inset_0_-1px_0_rgba(255,255,255,0.08),0_0_12px_rgba(150,170,255,0.08),0_10px_30px_rgba(0,0,0,0.12)] transition-all duration-300 ease-out";
+
+const hoverGlass =
+  "hover:border-white/55 hover:bg-white/[0.11] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.55),inset_0_-1px_0_rgba(255,255,255,0.12),0_0_20px_rgba(150,175,255,0.15),0_14px_32px_rgba(0,0,0,0.14)]";
+
+/* =========================================================
+   GLASS EFFECTS
+   ========================================================= */
+
+function GlassEffects({ mobile = false }: { mobile?: boolean }) {
+  return (
+    <>
+      {/* Main Glass Reflection */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/[0.12] via-[#9CACFF]/[0.035] to-transparent" />
+
+      {/* Large Soft Reflection */}
+      <div className="pointer-events-none absolute -right-[10%] -top-[45%] h-[125%] w-[75%] rounded-full bg-white/[0.09] blur-[28px]" />
+
+      {/* Middle Glass Reflection */}
+      <div className="pointer-events-none absolute left-[20%] top-[20%] h-[55%] w-[55%] rounded-full bg-[#AEBBFF]/[0.055] blur-[25px]" />
+
+      {/* Bottom Glass Depth */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-[#111632]/[0.16] to-transparent" />
+
+      {/* Inner Border */}
+      <div className="pointer-events-none absolute inset-[1px] rounded-[31px] border border-white/[0.06]" />
+
+      {/* Top Border Shine */}
+      <div className="pointer-events-none absolute left-6 right-6 top-0 h-px bg-gradient-to-r from-transparent via-white/80 to-transparent" />
+
+      {/* Bottom Border Shine */}
+      <div className="pointer-events-none absolute bottom-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+
+      {/* Left Border Shine */}
+      <div className="pointer-events-none absolute bottom-8 left-0 top-8 w-px bg-gradient-to-b from-transparent via-white/25 to-transparent" />
+
+      {/* Right Border Shine */}
+      <div className="pointer-events-none absolute bottom-8 right-0 top-8 w-px bg-gradient-to-b from-transparent via-white/25 to-transparent" />
+
+      {/* Moving Shine */}
+      {mobile ? (
+        <div className="pointer-events-none absolute -left-[55%] -top-[30%] h-[160%] w-[32%] skew-x-[-18deg] bg-gradient-to-r from-transparent via-white/[0.18] to-transparent opacity-0 transition-all duration-700 ease-out group-hover/mobile-card:left-[125%] group-hover/mobile-card:opacity-100" />
+      ) : (
+        <div className="pointer-events-none absolute -left-[55%] -top-[30%] h-[160%] w-[32%] skew-x-[-18deg] bg-gradient-to-r from-transparent via-white/[0.18] to-transparent opacity-0 transition-all duration-700 ease-out group-hover/card:left-[125%] group-hover/card:opacity-100" />
+      )}
+    </>
+  );
+}
+
+/* =========================================================
+   CARD CONTENT
+   ========================================================= */
+
+function CardContent({
+  benefit,
+  mobile = false,
+}: {
+  benefit: (typeof enterpriseBenefits)[number];
+  mobile?: boolean;
+}) {
+  const Icon = benefit.icon;
 
   return (
-    <div id="why-us" className="space-y-24 py-16">
-      {/* 1. ARCHITECTURAL TOPOLOGY */}
-      <section id="platform" className="px-6 max-w-6xl mx-auto">
-        <div className="rounded-3xl border border-slate-200/90 bg-gradient-to-br from-white via-slate-50/50 to-indigo-50/30 p-8 sm:p-12 shadow-xs space-y-10">
-          <div className="text-center space-y-2">
-            <span className="text-xs font-mono uppercase font-bold tracking-wider text-indigo-600">
-              Architectural Topology
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
-              The Connected Enterprise Nervous System
-            </h2>
-            <p className="text-sm text-slate-600 max-w-xl mx-auto">
-              A unified platform backbone connecting platform governance, organization boundaries, and operational business suites.
-            </p>
-          </div>
+    <div
+      className={
+        mobile
+          ? "relative z-10 flex h-full flex-col p-6"
+          : "relative z-10 flex h-full flex-col skew-x-[10deg] p-6"
+      }
+    >
+      {/* Icon */}
+      <div
+        className={
+          mobile
+            ? "mb-4 flex h-[36px] w-[36px] shrink-0 items-center justify-center rounded-[7px] border border-white/15 bg-white/[0.06] backdrop-blur-md transition-all duration-300 group-hover/mobile-card:border-white/30 group-hover/mobile-card:bg-white/[0.10]"
+            : "mb-4 flex h-[36px] w-[36px] shrink-0 items-center justify-center rounded-[7px] border border-white/15 bg-white/[0.06] backdrop-blur-md transition-all duration-300 group-hover/card:border-white/30 group-hover/card:bg-white/[0.10]"
+        }
+      >
+        <Icon
+          size={20}
+          strokeWidth={1.4}
+          className={
+            mobile
+              ? "text-[#7188F5] transition-colors duration-300 group-hover/mobile-card:text-[#A9B6FF]"
+              : "text-[#7188F5] transition-colors duration-300 group-hover/card:text-[#A9B6FF]"
+          }
+        />
+      </div>
 
-          {/* Central Platform Diagram Visual */}
-          <div className="space-y-4 max-w-2xl mx-auto">
-            {/* Top Tier: Global Authority */}
-            <div className="p-5 rounded-2xl border-2 border-indigo-500/80 bg-white shadow-xs text-center relative">
-              <div className="w-8 h-8 rounded-lg bg-indigo-600 text-white flex items-center justify-center mx-auto mb-2">
-                <Crown className="w-4 h-4" />
-              </div>
-              <div className="text-xs font-mono font-bold text-indigo-600 uppercase tracking-wider">
-                Platform Root
-              </div>
-              <div className="text-base font-extrabold text-slate-900 mt-0.5">
-                One Enterprise Cloud Platform
-              </div>
-              <div className="text-xs text-slate-500 mt-1">
-                Global governance • Multi-tenant isolation • WORM audit trail
-              </div>
-            </div>
+      {/* Title */}
+      <h3
+        className={
+          mobile
+            ? "text-[16px] font-semibold italic leading-[1.3] text-white sm:text-[17px]"
+            : "whitespace-nowrap text-[17px] font-semibold italic leading-[1.25] text-white"
+        }
+      >
+        {benefit.title}
+      </h3>
 
-            {/* Connecting Vertical Trunk */}
-            <div className="w-0.5 h-6 bg-indigo-200 mx-auto" />
-
-            {/* Middle Tier: Organization Boundary */}
-            <div className="p-5 rounded-2xl border border-slate-300 bg-white shadow-xs text-center">
-              <div className="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center mx-auto mb-2">
-                <Building2 className="w-4 h-4" />
-              </div>
-              <div className="text-xs font-mono font-bold text-slate-600 uppercase tracking-wider">
-                Organization Boundary
-              </div>
-              <div className="text-base font-extrabold text-slate-900 mt-0.5">
-                Enterprise Tenant Workspace
-              </div>
-              <div className="text-xs text-slate-500 mt-1">
-                Dedicated company units • Departments • Branches • User bindings
-              </div>
-            </div>
-
-            {/* Connecting Vertical Trunk */}
-            <div className="w-0.5 h-6 bg-indigo-200 mx-auto" />
-
-            {/* Bottom Tier: Business Domains */}
-            <div className="p-5 rounded-2xl border border-indigo-200 bg-indigo-50/50 shadow-xs text-center">
-              <div className="w-8 h-8 rounded-lg bg-indigo-600 text-white flex items-center justify-center mx-auto mb-2">
-                <Layers className="w-4 h-4" />
-              </div>
-              <div className="text-xs font-mono font-bold text-indigo-700 uppercase tracking-wider">
-                Connected Business Suites
-              </div>
-              <div className="text-base font-extrabold text-slate-900 mt-0.5">
-                HRMS • CRM • Finance • Procurement • Warehouse
-              </div>
-              <div className="text-xs text-slate-500 mt-1">
-                Native data sharing without point-to-point brittle integrations
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 2. 4 ENTERPRISE GOVERNANCE PILLARS */}
-      <section className="px-6 max-w-6xl mx-auto space-y-12">
-        <div className="text-center space-y-3">
-          <span className="text-xs font-mono uppercase font-bold tracking-wider text-indigo-600 bg-indigo-50 border border-indigo-100 px-3 py-1 rounded-full">
-            Enterprise Advantages
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
-            Designed for Modern Enterprise Governance
-          </h2>
-          <p className="text-base text-slate-600 max-w-xl mx-auto">
-            A cohesive architecture that delivers operational autonomy, strict data isolation, and comprehensive executive transparency.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {valuePillars.map((pillar) => (
-            <div
-              key={pillar.id}
-              className="p-6 rounded-2xl border border-slate-200 bg-white shadow-2xs hover:shadow-xs transition-shadow space-y-3"
-            >
-              <div className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center">
-                {getPillarIcon(pillar.iconName)}
-              </div>
-              <h3 className="text-base font-extrabold text-slate-900">{pillar.title}</h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                {pillar.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 3. 7 ROLE PREVIEWS: EVERY ROLE SEES WHAT MATTERS TO THEM */}
-      <section id="roles" className="px-6 max-w-6xl mx-auto space-y-12">
-        <div className="text-center space-y-3">
-          <span className="text-xs font-mono uppercase font-bold tracking-wider text-indigo-600 bg-indigo-50 border border-indigo-100 px-3 py-1 rounded-full">
-            Role-Based Perspectives
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
-            Every Role Sees Exactly What Matters
-          </h2>
-          <p className="text-base text-slate-600 max-w-2xl mx-auto">
-            Select a role below to preview how One Enterprise Cloud personalizes KPIs, boundaries, and operational tooling for each stakeholder.
-          </p>
-        </div>
-
-        {/* Role Selector Tabs */}
-        <div className="flex flex-wrap items-center justify-center gap-2 p-1.5 rounded-2xl bg-slate-100 max-w-4xl mx-auto">
-          {rolePreviews.map((role) => (
-            <button
-              key={role.id}
-              onClick={() => setActiveRole(role.id)}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
-                activeRole === role.id
-                  ? 'bg-white text-indigo-600 shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900'
-              }`}
-            >
-              {role.label}
-            </button>
-          ))}
-        </div>
-
-        {/* Active Role Detail Display Card */}
-        <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-xs space-y-6 max-w-4xl mx-auto">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-6">
-            <div>
-              <div className="text-xs font-mono font-bold text-indigo-600 uppercase">
-                {activeRoleData.scope}
-              </div>
-              <h3 className="text-2xl font-extrabold text-slate-900 mt-1">
-                {activeRoleData.label}
-              </h3>
-              <p className="text-xs text-slate-500 mt-0.5">{activeRoleData.tagline}</p>
-            </div>
-            <div className="text-xs px-3 py-1.5 rounded-lg bg-indigo-50 text-indigo-700 font-semibold border border-indigo-100 self-start sm:self-auto">
-              {activeRoleData.scopeLevel === 'global'
-                ? 'Global Scope'
-                : activeRoleData.scopeLevel === 'tenant'
-                ? 'Tenant Scope'
-                : 'Domain Scope'}
-            </div>
-          </div>
-
-          <p className="text-sm text-slate-700 leading-relaxed">
-            {activeRoleData.description}
-          </p>
-
-          {/* Role KPIs */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {activeRoleData.kpis.map((kpi, kIdx) => (
-              <div
-                key={kIdx}
-                className="p-4 rounded-2xl bg-slate-50 border border-slate-100 text-center sm:text-left"
-              >
-                <div className="text-xs text-slate-500 font-medium">{kpi.label}</div>
-                <div className="text-xl font-extrabold text-slate-900 mt-1">{kpi.val}</div>
-              </div>
-            ))}
-          </div>
-
-          {/* Responsibilities list */}
-          <div className="pt-2 space-y-2">
-            <div className="text-xs font-bold text-slate-900">
-              Core Responsibilities:
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              {activeRoleData.operationalResponsibilities.map((item, idx) => (
-                <div key={idx} className="flex items-center gap-2 text-xs text-slate-600">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-indigo-600 shrink-0" />
-                  <span>{item}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Visible Surface & Telemetry Boundary */}
-          <div className="p-4 rounded-xl bg-indigo-50/60 border border-indigo-100 text-xs text-slate-700 space-y-1">
-            <span className="font-bold text-slate-900">
-              Visible Surface & Boundary:{' '}
-            </span>
-            <span className="text-slate-600">{activeRoleData.viewSummary}</span>
-          </div>
-        </div>
-      </section>
+      {/* Description */}
+      <p
+        className={
+          mobile
+            ? "mt-3 text-[12px] italic leading-[1.55] text-white/75 sm:text-[13px]"
+            : "mt-4 max-w-[295px] text-[12px] italic leading-[1.5] text-white/80"
+        }
+      >
+        {benefit.description}
+      </p>
     </div>
   );
-};
+}
 
-export default WhyEnterpriseCloud;
+/* =========================================================
+   MAIN COMPONENT
+   ========================================================= */
+
+export default function WhyEnterpriseCloud() {
+  return (
+    <section
+      id="why-us"
+      className="
+        min-h-screen
+        w-full
+        overflow-x-hidden
+        bg-[#0F1330]
+        px-2
+        py-8
+        text-white
+
+        sm:px-4
+        sm:py-10
+
+        lg:px-2
+        lg:py-4
+      "
+      style={{
+        fontFamily: '"Onest", sans-serif',
+        scrollMarginTop: "88px",
+      }}
+    >
+      <div className="mx-auto flex w-full max-w-[1200px] flex-col">
+        {/* =====================================================
+            HEADING
+            ===================================================== */}
+
+        <div className="shrink-0 px-3 text-center">
+          <h2
+            className="
+              text-[26px]
+              font-semibold
+              leading-[1.2]
+              tracking-[-0.6px]
+
+              sm:text-[32px]
+
+              lg:text-[36px]
+              lg:tracking-[-0.7px]
+            "
+          >
+            Why One Enterprise Cloud
+          </h2>
+
+          <p
+            className="
+              mx-auto
+              mt-3
+              max-w-[600px]
+              text-[11px]
+              leading-[1.5]
+              text-white/75
+
+              sm:text-[12px]
+            "
+          >
+            Everything Your Enterprise Needs, Connected in One Platform
+          </p>
+        </div>
+
+        {/* =====================================================
+            MOBILE
+            0px - 639px
+            ===================================================== */}
+
+        <div
+          className="
+            mx-auto
+            mt-8
+            grid
+            w-full
+            max-w-[520px]
+            grid-cols-1
+            gap-[18px]
+
+            px-3
+            pb-10
+
+            sm:hidden
+          "
+        >
+          {enterpriseBenefits.map((benefit) => (
+            <article
+              key={benefit.id}
+              className={`
+                group/mobile-card
+
+                relative
+                min-h-[190px]
+                w-full
+
+                overflow-hidden
+                rounded-[32px]
+
+                ${glass}
+                ${hoverGlass}
+
+                hover:-translate-y-[2px]
+              `}
+            >
+              <GlassEffects mobile />
+              <CardContent benefit={benefit} mobile />
+            </article>
+          ))}
+        </div>
+
+        {/* =====================================================
+            TABLET
+            640px - 1023px
+            ===================================================== */}
+
+        <div
+          className="
+            mx-auto
+            mt-8
+            hidden
+            w-full
+            max-w-[960px]
+
+            grid-cols-2
+            gap-[20px]
+
+            px-4
+            pb-10
+
+            sm:grid
+            lg:hidden
+          "
+        >
+          {enterpriseBenefits.map((benefit) => (
+            <article
+              key={benefit.id}
+              className={`
+                group/mobile-card
+
+                relative
+                min-h-[210px]
+                w-full
+
+                overflow-hidden
+                rounded-[32px]
+
+                ${glass}
+                ${hoverGlass}
+
+                hover:-translate-y-[2px]
+              `}
+            >
+              <GlassEffects mobile />
+              <CardContent benefit={benefit} mobile />
+            </article>
+          ))}
+        </div>
+
+        {/* =====================================================
+            DESKTOP
+            1024px+
+            Reduced overlap + moved slightly right
+            ===================================================== */}
+
+        <div
+          className="
+            mx-auto
+            mt-[18px]
+            hidden
+            translate-x-[20px]
+            px-2
+            py-4
+            lg:block
+          "
+        >
+          <div className="group/cards relative h-[443px] w-[1000px]">
+            {enterpriseBenefits.map((benefit, index) => (
+              <article
+                key={benefit.id}
+                style={cardPositions[index]}
+                className={`
+                  group/card
+                  absolute
+
+                  h-[210px]
+                  w-[380px]
+
+                  overflow-hidden
+
+                  -skew-x-[10deg]
+
+                  rounded-[32px]
+
+                  ${glass}
+                  ${hoverGlass}
+
+                  group-has-[article:hover]/cards:opacity-35
+                  group-has-[article:hover]/cards:blur-[3px]
+                  group-has-[article:hover]/cards:brightness-75
+
+                  hover:!z-20
+                  hover:!opacity-100
+                  hover:!blur-none
+                  hover:!brightness-110
+
+                  hover:-translate-y-[2px]
+                  hover:scale-[1.015]
+                `}
+              >
+                <GlassEffects />
+                <CardContent benefit={benefit} />
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
