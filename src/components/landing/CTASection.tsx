@@ -19,7 +19,7 @@ const CTASection: React.FC = () => {
               enterprise operations?
             </h2>
 
-            <p className="mx-auto mt-4 max-w-[590px] text-[10px] leading-[1.7] text-[#9da9d6] sm:text-[11px]">
+            <p className="mx-auto mt-4 max-w-[590px] text-[12px] font-medium leading-[1.7] text-[#9da9d6] sm:text-[16px]">
               Start with the modules you need today. Scale across all 20
               business
               <br className="hidden sm:block" />

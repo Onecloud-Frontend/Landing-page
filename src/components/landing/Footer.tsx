@@ -1,27 +1,29 @@
 ﻿import React from 'react';
+import stacklyLogo from '../../assets/icons/stackly-logo.png';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-[#111a4b] px-6 pb-5 pt-16 text-white">
-      <div className="mx-auto max-w-[1180px]">
+    <footer className="bg-[#111a4b] px-6 pb-6 pt-16 text-white">
+      <div className="mx-auto max-w-[1280px]">
         {/* Main footer */}
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr_1fr] lg:gap-8">
           
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-2">
-              {/* Stackly-style logo mark */}
-              <div className="relative h-[25px] w-[22px]">
-                <span className="absolute left-[3px] top-0 h-[15px] w-[7px] -skew-x-[20deg] rounded-[4px] border-[3px] border-white" />
-                <span className="absolute bottom-0 right-[2px] h-[15px] w-[7px] -skew-x-[20deg] rounded-[4px] border-[3px] border-white" />
-              </div>
+            <div className="flex items-center gap-2.5">
+             
+            <img
+              src={stacklyLogo}
+              alt="Stackly"
+              className="h-[48px] w-auto object-contain"
+            />
 
-              <span className="text-[17px] font-bold tracking-[-0.5px]">
-                STACKLY
+              <span className="text-[26px] font-bold tracking-[-0.5px]">
+                {/* STACKLY */}
               </span>
             </div>
 
-            <p className="mt-6 max-w-[245px] text-[9px] leading-[1.7] text-[#8996c7]">
+            <p className="mt-6 max-w-[340px] text-[15px] leading-[1.6] text-[#c0c8e4]">
               Your all-in-one enterprise platform for
               <br />
               operations, data, workflows and
@@ -30,17 +32,17 @@ const Footer: React.FC = () => {
             </p>
 
             {/* Social Icons */}
-            <div className="mt-6 flex items-center gap-2">
+            <div className="mt-7 flex items-center gap-4">
 
               {/* Facebook */}
               <a
                 href="#"
                 aria-label="Facebook"
-                className="flex h-[22px] w-[22px] items-center justify-center rounded-[4px] bg-white text-[#111a4b] transition-transform hover:-translate-y-0.5"
+                className="flex h-[36px] w-[36px] items-center justify-center rounded-[8px] bg-white text-[#111a4b] transition-transform hover:-translate-y-0.5"
               >
                 <svg
-                  width="11"
-                  height="11"
+                  width="18"
+                  height="18"
                   viewBox="0 0 24 24"
                   fill="currentColor"
                   aria-hidden="true"
@@ -53,11 +55,11 @@ const Footer: React.FC = () => {
               <a
                 href="#"
                 aria-label="Twitter"
-                className="flex h-[22px] w-[22px] items-center justify-center rounded-[4px] bg-white text-[#111a4b] transition-transform hover:-translate-y-0.5"
+                className="flex h-[36px] w-[36px] items-center justify-center rounded-[8px] bg-white text-[#111a4b] transition-transform hover:-translate-y-0.5"
               >
                 <svg
-                  width="10"
-                  height="10"
+                  width="16"
+                  height="16"
                   viewBox="0 0 24 24"
                   fill="currentColor"
                   aria-hidden="true"
@@ -70,11 +72,11 @@ const Footer: React.FC = () => {
               <a
                 href="#"
                 aria-label="Instagram"
-                className="flex h-[22px] w-[22px] items-center justify-center rounded-[4px] bg-white text-[#111a4b] transition-transform hover:-translate-y-0.5"
+                className="flex h-[36px] w-[36px] items-center justify-center rounded-[8px] bg-white text-[#111a4b] transition-transform hover:-translate-y-0.5"
               >
                 <svg
-                  width="11"
-                  height="11"
+                  width="18"
+                  height="18"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -99,11 +101,11 @@ const Footer: React.FC = () => {
               <a
                 href="#"
                 aria-label="LinkedIn"
-                className="flex h-[22px] w-[22px] items-center justify-center rounded-[4px] bg-white text-[#111a4b] transition-transform hover:-translate-y-0.5"
+                className="flex h-[36px] w-[36px] items-center justify-center rounded-[8px] bg-white text-[#111a4b] transition-transform hover:-translate-y-0.5"
               >
                 <svg
-                  width="11"
-                  height="11"
+                  width="18"
+                  height="18"
                   viewBox="0 0 24 24"
                   fill="currentColor"
                   aria-hidden="true"
@@ -116,11 +118,11 @@ const Footer: React.FC = () => {
               <a
                 href="#"
                 aria-label="YouTube"
-                className="flex h-[22px] w-[22px] items-center justify-center rounded-[4px] bg-white text-[#111a4b] transition-transform hover:-translate-y-0.5"
+                className="flex h-[36px] w-[36px] items-center justify-center rounded-[8px] bg-white text-[#111a4b] transition-transform hover:-translate-y-0.5"
               >
                 <svg
-                  width="11"
-                  height="11"
+                  width="18"
+                  height="18"
                   viewBox="0 0 24 24"
                   fill="currentColor"
                   aria-hidden="true"
@@ -170,20 +172,20 @@ const Footer: React.FC = () => {
 
           {/* Developers */}
           <FooterColumn
-            title="Developers"
+            title="Downloads"
             links={[
-              'CLI',
-              'API',
-              'SDKs',
-              'Plugins',
-              'Changelog',
+              'iOS',
+              'Android',
+              'Mac',
+              'Windows',
+              'Chrome',
             ]}
           />
         </div>
 
         {/* Bottom divider */}
-        <div className="mt-8 border-t border-[#33417b] pt-5 text-center">
-          <p className="text-[9px] text-[#7886bb]">
+        <div className="mt-10 border-t border-[#33417b] pt-6 text-center">
+          <p className="text-[16px] text-[#c0c8e4]">
             © 2026 One Enterprise Cloud. All rights reserved.
           </p>
         </div>
@@ -203,16 +205,16 @@ const FooterColumn: React.FC<FooterColumnProps> = ({
 }) => {
   return (
     <div>
-      <h3 className="text-[10px] font-bold text-white">
+      <h3 className="text-[19px] font-medium text-white">
         {title}
       </h3>
 
-      <ul className="mt-4 space-y-2.5">
+      <ul className="mt-5 space-y-[18px]">
         {links.map((link) => (
           <li key={link}>
             <a
               href="#"
-              className="text-[9px] text-[#8996c7] transition-colors hover:text-white"
+              className="text-[16px] leading-6 text-[#c0c8e4] transition-colors hover:text-white"
             >
               {link}
             </a>
