@@ -1,49 +1,15 @@
-﻿/**
- * SECTION: What Our Clients Say (Testimonials)
- * ASSIGNED DEVELOPER: PERSON 5
- * OWNERSHIP SCOPE:
- * - Client reviews & social proof section
- * - 3-column responsive testimonial card grid
- * - Customer name, operational title, enterprise organization
- * - Star rating visualization
- * - Highlight metrics & key ROI impact badges
- * - Avatar display with graceful initials fallback
- *
- * RULES:
- * - Modify ONLY this file or companion files inside your personal scope.
- * - Do NOT modify App.tsx or files assigned to other developers.
- */
-/**
- * PERSON 5 - Siripurapu Pavan Putra
- * Section: What Our Clients Say
- */
-/**
- * SECTION: What Our Clients Say (Testimonials)
- * ASSIGNED DEVELOPER: PERSON 5
- *
- * Data comes from:
- * src/data/landingData.ts
- *
- * Do not modify App.tsx.
- */
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Star } from 'lucide-react';
-import { clientTestimonials } from '../../data/landingData';
-
-const customerPhotos = [
-  'https://randomuser.me/api/portraits/women/44.jpg',
-  'https://randomuser.me/api/portraits/men/32.jpg',
-  'https://randomuser.me/api/portraits/women/68.jpg',
-];
+import { testimonialsData } from '../../data/testimonialData';
 
 const Testimonials: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  // Show 2 testimonial cards at a time
   const visibleTestimonials = [
-    clientTestimonials[currentIndex],
-
-    clientTestimonials[
-      (currentIndex + 1) % clientTestimonials.length
+    testimonialsData[currentIndex],
+    testimonialsData[
+      (currentIndex + 1) % testimonialsData.length
     ],
   ];
 
@@ -53,43 +19,61 @@ const Testimonials: React.FC = () => {
       className="
         relative
         overflow-hidden
-        bg-[#071744]
+        bg-[#1e234a]
         px-5
-        py-[78px]
+        py-[60px]
         sm:px-8
         lg:px-12
       "
     >
+      {/* ==========================================
+          BACKGROUND GLOW
+      =========================================== */}
+
       <div
         className="
           pointer-events-none
           absolute
-          left-1/2
-          top-[35%]
-          h-[420px]
-          w-[850px]
-          -translate-x-1/2
-          -translate-y-1/2
-          rounded-full
-          bg-[#244d9b]/20
-          blur-[120px]
+          inset-0
+          bg-[radial-gradient(ellipse_at_50%_55%,#3c4ef933_0%,#3c4ef91a_38%,#3c4ef900_75%)]
         "
       />
 
-      <div className="relative mx-auto max-w-[1180px]">
+      {/* ==========================================
+          TOP BLUE LINE
+      =========================================== */}
+
+      <div
+        className="
+          pointer-events-none
+          absolute
+          left-0
+          top-0
+          h-px
+          w-full
+          bg-[#3c4ef9]
+        "
+      />
+
+      {/* ==========================================
+          MAIN CONTAINER
+      =========================================== */}
+
+      <div className="relative z-10 mx-auto max-w-[900px]">
+        {/* ========================================
+            HEADING
+        ========================================= */}
 
         <div className="text-center">
-
           <h2
             className="
               font-sans
-              text-[32px]
+              text-[30px]
               font-bold
               leading-[1.2]
               tracking-[-0.5px]
               text-white
-              sm:text-[36px]
-              lg:text-[40px]
+              sm:text-[34px]
             "
           >
             What Our Clients Say
@@ -98,279 +82,335 @@ const Testimonials: React.FC = () => {
           <p
             className="
               mx-auto
-              mt-3
-              max-w-[850px]
+              mt-[13px]
+              max-w-[700px]
               font-sans
-              text-[13px]
+              text-[11px]
               font-normal
-              leading-[1.6]
-              tracking-[0.1px]
-              text-[#c1c9dc]
-              sm:text-[14px]
+              leading-[1.5]
+              text-[#d2d7e6]
+              sm:text-[12px]
             "
           >
             Trusted by operations, technology and security leaders at the
             world&apos;s most demanding enterprises.
           </p>
-
         </div>
+
+        {/* ========================================
+            TESTIMONIAL CARDS
+        ========================================= */}
 
         <div
           className="
-            mt-[48px]
+            mt-[23px]
             grid
             grid-cols-1
-            gap-[44px]
+            gap-[45px]
             md:grid-cols-2
-            md:gap-[34px]
+            md:gap-[26px]
           "
         >
+          {visibleTestimonials.map((testimonial, index) => (
+            <article
+              key={`${testimonial.id}-${index}`}
+              className="relative pt-[25px]"
+            >
+              {/* ==================================
+                  BLUE GLOW BEHIND CARD
+              =================================== */}
 
-          {visibleTestimonials.map((testimonial, index) => {
-            const originalIndex =
-              clientTestimonials.findIndex(
-                (item) => item.id === testimonial.id
-              );
-            const customerPhoto =
-              customerPhotos[
-                originalIndex % customerPhotos.length
-              ];
+              <div
+                className="
+                  pointer-events-none
+                  absolute
+                  left-1/2
+                  top-[58%]
+                  h-[145px]
+                  w-[90%]
+                  -translate-x-1/2
+                  -translate-y-1/2
+                  rounded-full
+                  bg-[#3c4ef933]
+                  blur-[50px]
+                "
+              />
 
-            return (
+              {/* ==================================
+                  REVIEW GLASS CARD
+              =================================== */}
 
-              <article
-                key={`${testimonial.id}-${index}`}
-                className="relative pt-[42px]"
+              <div
+                className="
+                  relative
+                  z-10
+
+                  min-h-[160px]
+                  overflow-hidden
+
+                  rounded-[6px_16px_16px_16px]
+
+                  border
+                  border-[#7780a3]/55
+
+                  bg-[#292d53]/80
+
+                  backdrop-blur-[18px]
+                  backdrop-saturate-150
+
+                  px-[23px]
+                  pb-[20px]
+                  pt-[60px]
+                "
               >
+                {/* =================================
+                    SUBTLE GLASS HIGHLIGHT
+                ================================== */}
+
                 <div
                   className="
-                    relative
-                    min-h-[235px]
-                    rounded-[3px_20px_20px_20px]
-                    border
-                    border-[#425684]
-                    bg-[linear-gradient(135deg,#13295d_0%,#102351_50%,#0c1c47_100%)]
-                    px-[32px]
-                    pb-[30px]
-                    pt-[92px]
-                    shadow-[0_18px_40px_rgba(0,0,0,0.15)]
+                    pointer-events-none
+                    absolute
+                    inset-0
+                    bg-[linear-gradient(180deg,#ffffff08_0%,#ffffff00_65%)]
                   "
-                >
-                  <div
-                    className="
-                      absolute
-                      left-[30px]
-                      top-[96px]
-                      h-[100px]
-                      w-[2px]
-                      bg-[#3978ef]
-                    "
-                  />
+                />
 
-                  <div className="pl-[22px]">
-
-                    <div className="flex items-center gap-[3px]">
-
-                      {Array.from({
-                        length: testimonial.rating,
-                      }).map((_, starIndex) => (
-
-                        <Star
-                          key={starIndex}
-                          className="
-                            h-[16px]
-                            w-[16px]
-                            fill-[#ffb52e]
-                            text-[#ffb52e]
-                          "
-                          strokeWidth={1.5}
-                        />
-
-                      ))}
-
-                    </div>
-                    <p
-                      className="
-                        mt-[15px]
-                        font-sans
-                        text-[14px]
-                        font-normal
-                        leading-[1.65]
-                        tracking-[0.05px]
-                        text-[#f2f4fa]
-                        sm:text-[15px]
-                      "
-                    >
-                      “{testimonial.testimonial}”
-                    </p>
-
-                  </div>
-
-                </div>
+                {/* =================================
+                    LEFT VERTICAL ACCENT
+                ================================== */}
 
                 <div
                   className="
                     absolute
-                    left-[-12px]
-                    top-0
+                    bottom-[24px]
+                    left-[23px]
+                    top-[63px]
                     z-10
-                    flex
-                    h-[92px]
-                    w-[72%]
-                    min-w-[280px]
-                    items-center
-                    rounded-r-[19px]
-                    bg-[#3374df]
-                    px-[26px]
-                    shadow-[0_8px_22px_rgba(0,0,0,0.16)]
+                    w-px
+                    bg-[#536fdf]
                   "
-                >
+                />
 
-                  <div className="pr-[45px]">
+                {/* =================================
+                    REVIEW CONTENT
+                ================================== */}
 
-                    <h3
-                      className="
-                        font-sans
-                        text-[15px]
-                        font-bold
-                        leading-[1.3]
-                        tracking-[0.1px]
-                        text-white
-                      "
-                    >
-                      {testimonial.name}
-                    </h3>
+                <div className="relative z-10 pl-[15px]">
+                  {/* STAR RATING */}
 
-                    <p
-                      className="
-                        mt-[5px]
-                        font-sans
-                        text-[12px]
-                        font-normal
-                        leading-[1.4]
-                        text-[#dce7ff]
-                      "
-                    >
-                      {testimonial.role}
-                    </p>
-
-                    <p
-                      className="
-                        mt-[2px]
-                        font-sans
-                        text-[11px]
-                        font-normal
-                        leading-[1.4]
-                        text-[#b9d0ff]
-                      "
-                    >
-                      {testimonial.company}
-                    </p>
-
+                  <div className="flex items-center gap-[2px]">
+                    {Array.from({
+                      length: testimonial.rating,
+                    }).map((_, starIndex) => (
+                      <Star
+                        key={starIndex}
+                        className="
+                          h-[13px]
+                          w-[13px]
+                          fill-[#f4b942]
+                          text-[#f4b942]
+                        "
+                        strokeWidth={1}
+                      />
+                    ))}
                   </div>
 
-                  <span
-                    className="
-                      absolute
-                      -bottom-[11px]
-                      left-0
-                      h-0
-                      w-0
-                      border-r-[12px]
-                      border-t-[11px]
-                      border-r-[#174ca8]
-                      border-t-transparent
-                    "
-                  />
+                  {/* REVIEW TEXT */}
 
+                  <p
+                    className="
+                      mt-[8px]
+                      max-w-[350px]
+                      font-sans
+                      text-[11px]
+                      font-normal
+                      leading-[1.65]
+                      text-[#f4f5fa]
+                      sm:text-[11.5px]
+                    "
+                  >
+                    “{testimonial.testimonial}”
+                  </p>
                 </div>
-                <div
+              </div>
+
+              {/* ==================================
+                  CLIENT DETAILS BLUE BAR
+              =================================== */}
+
+              <div
+                className="
+                  absolute
+                  left-[-12px]
+                  top-0
+                  z-20
+
+                  flex
+                  h-[65px]
+                  w-[68%]
+                  min-w-[250px]
+                  items-center
+
+                  rounded-r-[16px]
+
+                  bg-[#536fdf]
+
+                  px-[18px]
+                "
+              >
+                {/* =================================
+                    CLIENT DETAILS
+                ================================== */}
+
+                <div className="pr-[35px]">
+                  <h3
+                    className="
+                      font-sans
+                      text-[11px]
+                      font-bold
+                      leading-[1.3]
+                      text-white
+                    "
+                  >
+                    {testimonial.name}
+                  </h3>
+
+                  <p
+                    className="
+                      mt-[3px]
+                      whitespace-nowrap
+                      font-sans
+                      text-[9px]
+                      font-normal
+                      leading-[1.4]
+                      text-[#d7dfff]
+                    "
+                  >
+                    {testimonial.role}
+                  </p>
+                </div>
+
+                {/* =================================
+                    FOLDED RIBBON TRIANGLE
+                ================================== */}
+
+                <span
                   className="
                     absolute
-                    right-[7%]
-                    top-[-10px]
-                    z-20
-                    h-[100px]
-                    w-[100px]
-                    overflow-hidden
-                    rounded-full
-                    border-[5px]
-                    border-white
-                    bg-white
-                    shadow-[0_8px_20px_rgba(0,0,0,0.25)]
-                    sm:h-[104px]
-                    sm:w-[104px]
+                    -bottom-[9px]
+                    left-0
+
+                    h-[9px]
+                    w-[12px]
+
+                    bg-[#3046a8]
+
+                    [clip-path:polygon(100%_0,100%_100%,0_0)]
                   "
-                >
+                />
+              </div>
 
-                  <img
-                    src={customerPhoto}
-                    alt={`${testimonial.name} profile`}
-                    className="
-                      block
-                      h-full
-                      w-full
-                      object-cover
-                      object-center
-                    "
-                  />
+              {/* ==================================
+                  CLIENT PHOTO
+              =================================== */}
 
-                </div>
+              <div
+                className="
+                  absolute
+                  right-[10%]
+                  top-[-8px]
+                  z-30
 
-              </article>
-            );
-          })}
+                  h-[69px]
+                  w-[69px]
 
+                  overflow-hidden
+                  rounded-full
+
+                  border-[4px]
+                  border-white
+
+                  bg-white
+                "
+              >
+                <img
+                  src={testimonial.photo}
+                  alt={`${testimonial.name} profile`}
+                  className="
+                    block
+                    h-full
+                    w-full
+                    object-cover
+                    object-center
+                  "
+                />
+              </div>
+            </article>
+          ))}
         </div>
+
+        {/* ========================================
+            SLIDER DOTS
+        ========================================= */}
 
         <div
           className="
-            mt-[38px]
+            mt-[28px]
             flex
             items-center
             justify-center
             gap-[10px]
           "
         >
+          {testimonialsData.map((testimonial, index) => {
+            const isActive = currentIndex === index;
 
-          {clientTestimonials.map((testimonial, index) => (
-
-            <button
-              key={testimonial.id}
-              type="button"
-
-              onClick={() => setCurrentIndex(index)}
-
-              aria-label={`Show testimonial ${index + 1}`}
-
-              className={
-                currentIndex === index
-                  ? `
-                      h-[7px]
-                      w-[24px]
-                      rounded-full
-                      bg-[#3978ef]
-                      transition-all
-                      duration-300
-                    `
-                  : `
-                      h-[7px]
-                      w-[7px]
-                      rounded-full
-                      bg-[#8997b8]
-                      transition-all
-                      duration-300
-                      hover:bg-white
-                    `
-              }
-            />
-
-          ))}
-
+            return (
+              <button
+                key={testimonial.id}
+                type="button"
+                onClick={() => setCurrentIndex(index)}
+                aria-label={`Show testimonial ${index + 1}`}
+                className="
+                  flex
+                  h-[14px]
+                  items-center
+                  justify-center
+                  border-0
+                  bg-transparent
+                  p-0
+                  outline-none
+                "
+              >
+                <span
+                  className={
+                    isActive
+                      ? `
+                          block
+                          h-[7px]
+                          w-[24px]
+                          rounded-full
+                          bg-[#536fdf]
+                          transition-all
+                          duration-300
+                        `
+                      : `
+                          block
+                          h-[7px]
+                          w-[7px]
+                          rounded-full
+                          bg-white
+                          transition-all
+                          duration-300
+                        `
+                  }
+                />
+              </button>
+            );
+          })}
         </div>
-
       </div>
-
     </section>
   );
 };
