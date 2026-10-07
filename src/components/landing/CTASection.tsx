@@ -3,14 +3,14 @@ import { ArrowRight } from 'lucide-react';
 
 const CTASection: React.FC = () => {
   return (
-    <section className="relative overflow-hidden bg-[#111a4b] px-6 py-10">
+    <section className="relative overflow-hidden bg-[#0F1330] px-6 py-10">
       {/* CTA glow */}
-      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[260px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#1c42bc]/35 blur-[90px]" />
+      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[260px] w-[700px]rounded-full bg-[#1c42bc]/35 blur-[90px]" />
 
       <div className="relative mx-auto max-w-[1180px]">
-        <div className="relative overflow-hidden rounded-[17px] border border-[#31458e] bg-[#17276b] px-6 py-14 text-center shadow-[0_0_40px_rgba(21,45,145,0.2)] sm:px-10">
+        <div className="relative overflow-hidden rounded-[17px] border border-[#31458e] bg-[#172B5C]/10 px-6 py-14 text-center shadow-[0_0_40px_rgba(21,45,145,0.2)] sm:px-10">
           {/* Inner gradient */}
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_100%,rgba(32,92,255,0.28),transparent_60%)]" />
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_100%,rgba(32,92,255,0.16),transparent_70%)]" />
 
           <div className="relative">
             <h2 className="mx-auto max-w-[520px] text-[27px] font-bold leading-[1.12] tracking-[-0.8px] text-white sm:text-[31px]">
