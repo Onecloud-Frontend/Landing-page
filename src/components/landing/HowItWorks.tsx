@@ -71,7 +71,7 @@ export const HowItWorks = () => {
     <section
       id="how-it-works"
       aria-labelledby="how-it-works-title"
-      style={{ fontFamily: "'Onest', sans-serif" }}
+      style={{ fontFamily: "'Onest', sans-serif", scrollMarginTop: "88px" }}
       className="relative isolate overflow-hidden bg-[#13183A] px-5 pb-[104px] pt-[72px] sm:px-8 sm:pb-[118px] sm:pt-20 lg:px-12 lg:pb-[105px] lg:pt-[73px]"
     >
       <div

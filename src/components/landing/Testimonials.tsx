@@ -18,6 +18,7 @@ const Testimonials: React.FC = () => {
       id="testimonials"
       className="
         relative
+        scroll-mt-[88px]
         overflow-hidden
         bg-[#1e234a]
         px-5
