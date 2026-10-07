@@ -5,7 +5,6 @@ import {
   SlidersHorizontal,
   type LucideIcon,
 } from 'lucide-react';
-import { useEffect } from 'react';
 
 type WorkflowStep = {
   number: string;
@@ -51,27 +50,11 @@ const workflowSteps: WorkflowStep[] = [
 ];
 
 export const HowItWorks = () => {
-  useEffect(() => {
-    const existingFont = document.querySelector(
-      'link[data-onest-font="true"]',
-    );
-
-    if (!existingFont) {
-      const link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.href =
-        'https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap';
-      link.dataset.onestFont = 'true';
-
-      document.head.appendChild(link);
-    }
-  }, []);
 
   return (
     <section
       id="how-it-works"
       aria-labelledby="how-it-works-title"
-      style={{ fontFamily: "'Onest', sans-serif" }}
       className="relative isolate overflow-hidden bg-[#0F1330] px-5 pb-[104px] pt-[72px] sm:px-8 sm:pb-[118px] sm:pt-20 lg:px-12 lg:pb-[105px] lg:pt-[73px]"
     >
       <div
@@ -171,14 +154,14 @@ export const HowItWorks = () => {
             <div className="mt-6 flex flex-wrap items-center gap-3 lg:mt-[23px] lg:gap-[14px]">
               <a
   href="#login"
-  className="inline-flex min-h-10 items-center justify-center rounded-full bg-[#406ed9] px-4 py-2.5 text-[11px] font-bold leading-none text-white shadow-[0_6px_22px_rgba(55,111,229,0.5),inset_0_1px_0_rgba(255,255,255,0.14)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#4a79e3] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a3d3ff] motion-reduce:transform-none lg:min-h-[34px] lg:px-4 lg:py-2 lg:text-[10px]"
+  className="inline-flex min-h-10 items-center justify-center rounded-full bg-[#406ed9] px-4 py-2.5 text-[11px] font-bold leading-none text-white shadow-[0_6px_22px_rgba(55,111,229,0.5),inset_0_1px_0_rgba(255,255,255,0.14)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#4a79e3] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a3d3ff] motion-reduce:transform-none lg:min-h-[34px] lg:min-w-[107px] lg:px-4 lg:py-2 lg:text-[11px]"
 >
   Get Started
 </a>
 
 <a
   href="#register"
-  className="inline-flex min-h-10 items-center justify-center rounded-full border border-[#e5e9f6] bg-transparent px-4 py-2.5 text-[11px] font-bold leading-none text-[#f4f6fd] transition-colors duration-200 hover:bg-white/[0.06] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a3d3ff] lg:min-h-[34px] lg:px-4 lg:py-2 lg:text-[10px]"
+  className="inline-flex min-h-10 items-center justify-center rounded-full border border-[#e5e9f6] bg-transparent px-4 py-2.5 text-[11px] font-bold leading-none text-[#f4f6fd] transition-colors duration-200 hover:bg-white/[0.06] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a3d3ff] lg:min-h-[34px] lg:px-4 lg:py-2 lg:text-[11px]"
 >
   Talk to sales
 </a>
