@@ -75,6 +75,7 @@ const FeaturesByModule: React.FC = () => {
       id="domains"
       className="
     relative
+    scroll-mt-[88px]
     overflow-hidden
     bg-[#0F1330]
     [background-image:radial-gradient(circle_at_50%_20%,#232A5C1A_0%,transparent_65%)]
