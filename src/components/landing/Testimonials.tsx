@@ -4,11 +4,23 @@ import { testimonialsData } from "../../data/testimonialData";
 
 const Testimonials: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isChanging, setIsChanging] = useState(false);
 
   const visibleTestimonials = [
     testimonialsData[currentIndex],
     testimonialsData[(currentIndex + 1) % testimonialsData.length],
   ];
+
+  const handleTestimonialChange = (index: number) => {
+    if (index === currentIndex) return;
+
+    setIsChanging(true);
+
+    setTimeout(() => {
+      setCurrentIndex(index);
+      setIsChanging(false);
+    }, 150);
+  };
 
   return (
     <section
@@ -33,18 +45,14 @@ const Testimonials: React.FC = () => {
                     left-1/2
                     top-0
                     z-0
-                    
                     h-[420px]
                     w-[720px]
                     -translate-x-1/2
-                    
                     rounded-[50%/60%]
-                    
                     bg-[radial-gradient(ellipse_at_top,_#172B5C1A_0%,_#172B5C1A_10%,_#172B5C0D_62%,_transparent_78%)]
-                    
                     blur-[55px]
                     "
-                    aria-hidden="true"
+        aria-hidden="true"
       />
 
       {/* TOP BLUE LINE */}
@@ -59,7 +67,7 @@ const Testimonials: React.FC = () => {
                       w-full
                       bg-[#2F6FE0]
                       "
-                              aria-hidden="true"
+        aria-hidden="true"
       />
 
       <div className="relative z-20 mx-auto max-w-[900px]">
@@ -95,9 +103,7 @@ const Testimonials: React.FC = () => {
           </p>
         </div>
 
-        {/* =========================================
-TESTIMONIAL CARDS
-========================================== */}
+        {/* TESTIMONIAL CARDS */}
         <div
           className="
                         mt-[23px]
@@ -111,7 +117,11 @@ TESTIMONIAL CARDS
           {visibleTestimonials.map((testimonial, index) => (
             <article
               key={`${testimonial.id}-${index}`}
-              className="relative h-[185px] pt-[25px]"
+              className={`relative h-[185px] pt-[25px] transition-all duration-300 ${
+                isChanging
+                  ? "translate-y-[4px] opacity-0"
+                  : "translate-y-0 opacity-100"
+              }`}
             >
               {/* REVIEW CARD */}
               <div
@@ -121,16 +131,11 @@ TESTIMONIAL CARDS
                             left-[12px]
                             right-0
                             top-[25px]
-                            
                             overflow-hidden
-                            
                             rounded-[5px_17px_17px_17px]
-                            
                             border
                             border-[#8EA9FF]/25
-                            
                             bg-[#172B5C]/35
-                            
                             backdrop-blur-[14px]
 "
               >
@@ -191,26 +196,20 @@ TESTIMONIAL CARDS
                 </div>
               </div>
 
-              {/* =====================================
-CLIENT BLUE RIBBON
-====================================== */}
+              {/* CLIENT BLUE RIBBON */}
               <div
                 className="
                               absolute
                               left-0
                               top-0
                               z-20
-                              
                               flex
                               h-[65px]
                               w-[296px]
                               max-w-[70%]
                               items-center
-                              
                               rounded-r-[16px]
-                              
                               bg-[#526FDC]
-                              
                               pl-[18px]
                               pr-[55px]
 "
@@ -230,7 +229,7 @@ CLIENT BLUE RIBBON
                   <p
                     className="
                                   mt-[2px]
-                                  whitespace-nowrap 
+                                  whitespace-nowrap
                                   text-[9px]
                                   font-normal
                                   leading-[13px]
@@ -254,22 +253,20 @@ CLIENT BLUE RIBBON
 "
                 />
               </div>
+
+              {/* PROFILE IMAGE */}
               <div
                 className="
                                   absolute
                                   right-[43px]
                                   top-[-8px]
                                   z-30
-                                  
                                   h-[69px]
                                   w-[69px]
-                                  
                                   overflow-hidden
                                   rounded-full
-                                  
                                   border-[4px]
                                   border-white
-                                  
                                   bg-white
 "
               >
@@ -288,6 +285,8 @@ CLIENT BLUE RIBBON
             </article>
           ))}
         </div>
+
+        {/* DOTS */}
         <div
           className="
                         mt-[27px]
@@ -305,10 +304,11 @@ CLIENT BLUE RIBBON
               <button
                 key={testimonial.id}
                 type="button"
-                onClick={() => setCurrentIndex(index)}
+                onClick={() => handleTestimonialChange(index)}
                 aria-label={`Show testimonial ${index + 1}`}
                 className="
                               flex
+                              cursor-pointer
                               items-center
                               justify-center
                               border-0
@@ -329,7 +329,7 @@ CLIENT BLUE RIBBON
                           transition-all
                           duration-300
                           `
-                                                : `
+                      : `
                           block
                           h-[7px]
                           w-[7px]
@@ -350,3 +350,5 @@ CLIENT BLUE RIBBON
 };
 
 export default Testimonials;
+
+
