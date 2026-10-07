@@ -73,7 +73,18 @@ const FeaturesByModule: React.FC = () => {
   return (
     <section
       id="domains"
-      className="relative overflow-hidden bg-[#13183A] px-6 py-7 sm:px-8 sm:py-8 lg:px-10 lg:py-8"
+      className="
+    relative
+    overflow-hidden
+    bg-[#0F1330]
+    [background-image:radial-gradient(circle_at_50%_20%,#232A5C1A_0%,transparent_65%)]
+    px-6
+    py-7
+    sm:px-8
+    sm:py-8
+    lg:px-10
+    lg:py-8
+  "
     >
       <div className="mx-auto max-w-[900px]">
         <div className="mb-5 text-center">
