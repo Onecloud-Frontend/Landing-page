@@ -44,7 +44,7 @@ const FAQ: React.FC = () => {
   return (
     <section
       id="faq"
-      className="relative overflow-hidden bg-[#111a4b] px-6 pb-24 pt-24 text-white"
+      className="relative overflow-hidden bg-[#0F1330] px-6 pb-24 pt-24 text-white" //BG colour changed
     >
       {/* Background glow */}
       <div className="pointer-events-none absolute left-1/2 top-0 h-[500px] w-[700px] -translate-x-1/2 rounded-full bg-[#273b9b]/20 blur-[130px]" />
@@ -78,7 +78,7 @@ const FAQ: React.FC = () => {
             {/* Testimonial card: two-tone glass + faded edge */}
             <div className="relative mt-0 overflow-hidden rounded-[12px] border border-white/1 bg-gradient-to-br from-white/[0.16] via-white/[0.06] to-white/[0.02] p-4 backdrop-blur-md">
               {/* Dark fade overlay (bottom-right) */}
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-tl from-[#111a4b]/70 via-transparent to-transparent" />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-tl from-[#0F1330]/60 via-transparent to-transparent" />
 
               <div className="relative z-10">
                 <div className="flex items-center gap-3">

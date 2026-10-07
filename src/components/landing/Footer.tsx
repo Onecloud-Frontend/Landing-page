@@ -3,7 +3,7 @@ import stacklyLogo from '../../assets/icons/stackly-logo.png';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-[#111a4b] px-6 pb-6 pt-16 text-white">
+    <footer className="bg-[#0F1330] px-6 pb-6 pt-16 text-white">
       <div className="mx-auto max-w-[1280px]">
         {/* Main footer */}
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr_1fr] lg:gap-8">
@@ -38,7 +38,7 @@ const Footer: React.FC = () => {
               <a
                 href="#"
                 aria-label="Facebook"
-                className="flex h-[36px] w-[36px] items-center justify-center rounded-[8px] bg-white text-[#111a4b] transition-transform hover:-translate-y-0.5"
+                className="flex h-[36px] w-[36px] items-center justify-center rounded-[8px] bg-white text-[#0F1330] transition-transform hover:-translate-y-0.5"
               >
                 <svg
                   width="18"
