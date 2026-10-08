@@ -28,7 +28,7 @@ export const testimonialsData: TestimonialData[] = [
   },
   {
     id: 3,
-    name: 'Damon Salvator',
+    name: 'Damon Salvatore',
     role: 'Team Lead at Microsoft',
     photo: 'https://randomuser.me/api/portraits/women/68.jpg',
     rating: 5,
