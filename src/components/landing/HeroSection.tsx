@@ -1,21 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Sparkles, Check } from 'lucide-react';
 import { ACTIONS } from '../../data/navData';
-import { EYEBROW, SUBTITLE, TRUST_POINTS, BADGES, WIRES, DOMES, GLOWS, BASE_COLOR, ACCENT, CENTER_Y, RING_FADE, RING_DIM } from '../../data/heroData';
+import { EYEBROW, SUBTITLE, TRUST_POINTS, BADGES, WIRES } from '../../data/heroData';
 
 const RING_SCALE = 1.6;
-/* Radial mask: opacity `floor` inside `from` px of the circles' centre, easing to full at `to` px. */
-const radialFade = (floor: number, [from, to]: number[]) => {
-  const mask = `radial-gradient(circle at 50% ${CENTER_Y}px, rgba(0,0,0,${floor}) ${from}px, #000 ${to}px)`;
-  return { WebkitMaskImage: mask, maskImage: mask };
-};
-/* Circle fill: fades out at its cut line, or at 55% of its height when it has none. */
-const domeFill = (alpha: number, top: number, cut?: number) => {
-  const color = (a: number) => `rgba(${ACCENT},${a})`;
-  if (!cut) return `linear-gradient(to bottom, ${color(alpha)}, transparent 55%)`;
-  const end = cut - top;
-  return `linear-gradient(to bottom, ${color(alpha)}, ${color(alpha * 0.6)} ${end - 30}px, transparent ${end + 8}px)`;
-};
 
 export const HeroSection: React.FC = () => {
   const svgRef = useRef<SVGSVGElement>(null);
@@ -43,91 +31,47 @@ export const HeroSection: React.FC = () => {
         aria-hidden="true"
       />
 
-      {/* Concentric circles behind the heading; solid ones hide the wires behind them (desktop) */}
-      <div className="absolute inset-0 pointer-events-none z-[1] hidden lg:block" aria-hidden="true">
-        {DOMES.map(({ top, size, alpha, solid, cut }) => (
-          <div
-            key={top}
-            className="absolute left-1/2 -translate-x-1/2 rounded-full"
-            style={{
-              top,
-              width: size,
-              height: size,
-              backgroundColor: solid ? BASE_COLOR : 'transparent',
-              backgroundImage: domeFill(alpha, top, cut),
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Soft feathered glows behind the heading and subtitle (desktop) */}
-      {GLOWS.map(({ top, width, height, alpha, blur }) => {
-        const c = (k: number) => `rgba(${ACCENT},${(alpha * k).toFixed(3)})`;
-        return (
-          <div
-            key={top}
-            className="absolute left-1/2 -translate-x-1/2 rounded-[50%] pointer-events-none z-[1] hidden lg:block"
-            style={{
-              top,
-              width,
-              height,
-              filter: `blur(${blur}px)`,
-              backgroundImage: `radial-gradient(closest-side, ${c(1)} 0%, ${c(0.67)} 33%, ${c(0.3)} 60%, ${c(0.08)} 82%, transparent 100%)`,
-            }}
-            aria-hidden="true"
-          />
-        );
-      })}      {/* Wire layers (desktop): each wire fades in as it leaves the circles; rings stay visible but dim behind them */}
-      {[
-        ...WIRES.map(({ id, d, fade }) => ({ key: id, style: radialFade(0, fade), paths: [{ id, d }], rings: false })),
-        { key: 'rings', style: radialFade(RING_DIM, RING_FADE), paths: WIRES.map(({ id, d }) => ({ id: `${id}Ring`, d })), rings: true },
-      ].map(({ key, style, paths, rings }) => (
-        <svg
-          key={key}
-          ref={rings ? svgRef : undefined}
-          style={style}
-          className={`absolute inset-x-0 top-20 h-[calc(100%-5rem)] w-full pointer-events-none hidden lg:block ${rings ? 'z-[2]' : 'z-[1]'}`}
-          viewBox="0 0 1000 1000"
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          <defs>
-            {rings ? (
-              <>
-                <filter id="ringGlow" x="-60%" y="-60%" width="220%" height="220%">
-                  <feGaussianBlur in="SourceGraphic" stdDeviation="3.2" result="blur" />
-                  <feMerge>
-                    <feMergeNode in="blur" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
-                </filter>
-                <g id="ring">
-                  <circle r="6.5" fill="none" stroke="#2F6FE0" strokeWidth="2.8" strokeOpacity="0.75" filter="url(#ringGlow)" />
-                  <circle r="4.8" fill="#18244E" fillOpacity="0.9" />
-                  <circle r="4.8" fill="none" stroke="#9EC2FF" strokeWidth="1.6" />
-                </g>
-              </>
-            ) : (
-              <linearGradient id={`${key}Gradient`} x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#4D6EC8" stopOpacity="0.25" />
-                <stop offset="50%" stopColor="#8EA9FF" stopOpacity="0.85" />
-                <stop offset="100%" stopColor="#4D6EC8" stopOpacity="0.25" />
-              </linearGradient>
-            )}
-          </defs>
-
-          <g fill="none" stroke={rings ? 'none' : `url(#${key}Gradient)`} strokeWidth="1.3">
-            {paths.map(({ id, d }) => <path key={id} id={id} d={d} />)}
+      {/* Connector wires with travelling rings (desktop) */}
+      <svg
+        ref={svgRef}
+        className="absolute inset-x-0 top-20 h-[calc(100%-5rem)] w-full pointer-events-none z-0 hidden lg:block"
+        viewBox="0 0 1000 1000"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <defs>
+          <linearGradient id="wireGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#4D6EC8" stopOpacity="0.25" />
+            <stop offset="50%" stopColor="#8EA9FF" stopOpacity="0.85" />
+            <stop offset="100%" stopColor="#4D6EC8" stopOpacity="0.25" />
+          </linearGradient>
+          <filter id="ringGlow" x="-60%" y="-60%" width="220%" height="220%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="3.2" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+          <g id="ring">
+            <circle r="6.5" fill="none" stroke="#2F6FE0" strokeWidth="2.8" strokeOpacity="0.75" filter="url(#ringGlow)" />
+            <circle r="4.8" fill="#18244E" fillOpacity="0.9" />
+            <circle r="4.8" fill="none" stroke="#9EC2FF" strokeWidth="1.6" />
           </g>
+        </defs>
 
-          {rings && paths.map(({ id }) => (
-            <g key={id}>
-              <animateMotion dur="5s" repeatCount="indefinite"><mpath href={`#${id}`} /></animateMotion>
-              <use href="#ring" transform={ringTransform} />
-            </g>
-          ))}
-        </svg>
-      ))}      {/* Module badges (desktop) */}
+        <g fill="none" stroke="url(#wireGradient)" strokeWidth="1.3">
+          {WIRES.map(({ id, d }) => <path key={id} id={id} d={d} />)}
+        </g>
+
+        {WIRES.map(({ id }) => (
+          <g key={id}>
+            <animateMotion dur="5s" repeatCount="indefinite"><mpath href={`#${id}`} /></animateMotion>
+            <use href="#ring" transform={ringTransform} />
+          </g>
+        ))}
+      </svg>
+
+      {/* Module badges (desktop) */}
       <div className="absolute inset-x-0 bottom-0 top-20 pointer-events-none z-20 hidden lg:block">
         {BADGES.map(({ label, icon, top, pos }) => (
           <div
@@ -145,12 +89,12 @@ export const HeroSection: React.FC = () => {
 
       {/* Copy */}
       <div className="relative z-30 mx-auto flex max-w-[760px] flex-col items-center text-center">
-        <div className="inline-flex items-center gap-2 lg:gap-1.5 lg:mt-[3px] lg:-translate-y-4 rounded-full border border-[#3A56A8]/85 bg-[#1C265A]/90 px-4 lg:px-3 py-1.5 lg:py-1 text-[9px] sm:text-[10px] lg:text-[9px] font-semibold tracking-[0.12em] sm:tracking-[0.16em] lg:tracking-[0.12em] text-[#93AEF8] shadow-[0_0_20px_rgba(47,111,224,0.4)] backdrop-blur-sm">
-          <Sparkles className="h-3.5 w-3.5 lg:h-3 lg:w-3 shrink-0" />
+        <div className="inline-flex items-center gap-2 rounded-full border border-[#3A56A8]/85 bg-[#1C265A]/90 px-4 py-1.5 text-[9px] sm:text-[10px] font-semibold tracking-[0.12em] sm:tracking-[0.16em] text-[#93AEF8] shadow-[0_0_20px_rgba(47,111,224,0.4)] backdrop-blur-sm">
+          <Sparkles className="h-3.5 w-3.5 shrink-0" />
           <span>{EYEBROW}</span>
         </div>
 
-        <h1 className="mt-5 sm:mt-6 lg:mt-[31px] max-w-[640px] text-[30px] sm:text-[44px] md:text-[52px] xl:text-[56px] font-bold leading-[1.1] tracking-[-0.03em] text-white">
+        <h1 className="mt-5 sm:mt-6 lg:mt-7 max-w-[640px] text-[30px] sm:text-[44px] md:text-[52px] xl:text-[56px] font-bold leading-[1.1] tracking-[-0.03em] text-white">
           <span className="block">One Platform.</span>
           <span className="block">
             Every{' '}
