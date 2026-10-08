@@ -28,8 +28,8 @@ export const testimonialsData: TestimonialData[] = [
   },
   {
     id: 3,
-    name: 'Elena Rostova',
-    role: 'VP of Infrastructure at FinCore Global',
+    name: 'Damon Salvatore',
+    role: 'Team Lead at Microsoft',
     photo: 'https://randomuser.me/api/portraits/women/68.jpg',
     rating: 5,
     testimonial:
