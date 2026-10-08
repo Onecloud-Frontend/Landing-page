@@ -1,9 +1,9 @@
 /** Navbar content: section links and call-to-action buttons. */
 export const NAV_ITEMS = [
-  { label: 'Why One Enterprise', href: '#why-us' },
-  { label: 'Features', href: '#domains' },
+  { label: 'Why One Enterprise', href: '#enterprise' },
+  { label: 'Features', href: '#features' },
   { label: 'How it works', href: '#how-it-works' },
-  { label: 'Clients', href: '#testimonials' },
+  { label: 'Clients', href: '#clients' },
 ];
 
 export const ACTIONS = [
